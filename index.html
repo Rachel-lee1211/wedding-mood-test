@@ -149,6 +149,6 @@ function axisBar(ax){
 function shopCard(name,rank){const s=shops[name]||{};let links='';if(s.home)links+=`<a class="linkbtn" target="_blank" href="${s.home}">공식 홈페이지</a>`;if(s.insta)links+=`<a class="linkbtn insta" target="_blank" href="${s.insta}">공식 인스타그램</a>`;return `<div class="shop"><div class="shop-top"><div><div class="rank">${rank}</div><div class="shop-name">${name}</div></div></div><div class="links">${links||'<span class="small">공식 채널 확인 중</span>'}</div></div>`}
 function renderResult(code,score){document.getElementById('test').style.display='none';const t=types[code];let bars=axisScores(score).map(axisBar).join('');let shopHtml=shopCard(t.main,'대표 드레스샵')+t.subs.map((s,i)=>shopCard(s,`보조 추천 ${i+1}`)).join('');document.getElementById('result').className='result show';document.getElementById('result').innerHTML=`<div class="result-card"><div class="type-code">${code}</div><div class="type-name">${t.name}</div><div class="mood">${t.mood}</div><p class="desc">${t.desc}</p><div class="tags">${t.tags.map(x=>`<span class="tag">${x}</span>`).join('')}<span class="tag">추천 홀: ${t.hall}</span></div><h3>4축 성향 분석</h3><div class="bars">${bars}</div><h3>추천 드레스샵</h3><div class="shops">${shopHtml}</div><div class="footer-actions"><button class="btn" onclick="location.reload()">다시 테스트하기</button></div><p class="small">결과는 취향 기반 추천이며, 실제 피팅 결과·예식장 조명·체형·예산에 따라 달라질 수 있어요.</p></div>`;window.scrollTo({top:0,behavior:'smooth'})}
 </script>
-<div class="version">v0.00.1</div>
+<div class="version">v0.00.2</div>
 </body>
 </html>

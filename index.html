@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>웨딩 드레스 유형 테스트</title>
+  <style>
+    :root{--bg:#fff8fa;--card:#fff;--ink:#2d2328;--muted:#75666e;--accent:#d88da8;--accent2:#f3d4df;--line:#f0dce4;--dark:#8f5270}
+    *{box-sizing:border-box} body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Apple SD Gothic Neo,Noto Sans KR,sans-serif;background:linear-gradient(180deg,#fff8fa,#fff);color:var(--ink)}
+    .wrap{max-width:880px;margin:0 auto;padding:28px 18px 60px}.hero{padding:34px 24px;border:1px solid var(--line);background:rgba(255,255,255,.82);border-radius:28px;box-shadow:0 20px 70px rgba(175,99,132,.12)}
+    h1{font-size:32px;line-height:1.15;margin:0 0 12px}.sub{color:var(--muted);line-height:1.7;margin:0}.badge{display:inline-flex;gap:8px;align-items:center;background:#fff;border:1px solid var(--line);padding:8px 12px;border-radius:999px;color:var(--dark);font-weight:700;margin-bottom:16px}.section{margin-top:22px}.qcard{display:none;padding:24px;border:1px solid var(--line);background:var(--card);border-radius:24px;box-shadow:0 12px 45px rgba(175,99,132,.08)}.qcard.active{display:block}.qnum{font-size:14px;color:var(--dark);font-weight:800}.qtitle{font-size:22px;line-height:1.35;margin:8px 0 18px;font-weight:900}.hint{font-size:14px;color:var(--muted);margin-top:-8px;margin-bottom:16px}.choices{display:grid;gap:10px}.choice{border:1px solid var(--line);border-radius:18px;padding:15px 16px;background:#fff;cursor:pointer;transition:.15s;line-height:1.45}.choice:hover{border-color:var(--accent);transform:translateY(-1px)}.choice.selected{background:var(--accent2);border-color:var(--accent);font-weight:800}.nav{display:flex;gap:10px;margin-top:18px}.btn{appearance:none;border:0;border-radius:999px;padding:13px 18px;background:var(--accent);color:#fff;font-weight:900;cursor:pointer}.btn.secondary{background:#fff;color:var(--dark);border:1px solid var(--line)}.btn:disabled{opacity:.45;cursor:not-allowed}.progress{height:10px;background:#f7e9ef;border-radius:999px;overflow:hidden;margin:18px 0}.progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,#d88da8,#b7648d);transition:.25s}.result{display:none}.result.show{display:block}.result-card{padding:26px;border:1px solid var(--line);background:#fff;border-radius:28px;box-shadow:0 18px 60px rgba(175,99,132,.12)}.type-code{font-size:15px;color:var(--dark);font-weight:900}.type-name{font-size:34px;margin:4px 0 10px;font-weight:950}.mood{font-size:18px;font-weight:900}.desc{color:var(--muted);line-height:1.7}.bars{display:grid;gap:18px;margin-top:18px}.axis-card{padding:16px 14px;border:1px solid var(--line);border-radius:20px;background:#fffdfd}.axis-title{text-align:center;font-weight:950;color:#4a3b43;margin-bottom:10px}.axis-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:8px}.axis-pct{font-size:20px;font-weight:950}.axis-name{font-size:13px;color:var(--muted);font-weight:800}.axis-track{position:relative;height:14px;border-radius:999px;background:#f0eef0;overflow:hidden}.axis-fill-left{position:absolute;left:0;top:0;height:100%;border-radius:999px 0 0 999px;background:linear-gradient(90deg,#d88da8,#b7648d)}.axis-fill-right{position:absolute;right:0;top:0;height:100%;border-radius:0 999px 999px 0;background:linear-gradient(90deg,#b7648d,#8f5270)}.axis-foot{display:flex;justify-content:space-between;margin-top:8px}.axis-code{font-size:12px;font-weight:950;color:var(--dark)}.shops{display:grid;gap:14px;margin-top:20px}.shop{border:1px solid var(--line);border-radius:22px;padding:18px;background:#fffdfd}.shop-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.rank{font-size:13px;color:var(--dark);font-weight:900}.shop-name{font-size:21px;font-weight:950}.tags{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}.tag{font-size:13px;background:#fff3f7;color:#8f5270;border:1px solid var(--line);padding:6px 9px;border-radius:999px}.links{display:flex;flex-wrap:wrap;gap:8px}.linkbtn{display:inline-block;text-decoration:none;background:#2d2328;color:#fff;padding:9px 12px;border-radius:999px;font-size:13px;font-weight:900}.linkbtn.insta{background:#c4648e}.small{font-size:13px;color:var(--muted);line-height:1.6}.footer-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}@media(max-width:620px){h1{font-size:26px}.type-name{font-size:28px}.bar-row{grid-template-columns:78px 1fr 42px}.wrap{padding:18px 12px 40px}.hero,.qcard,.result-card{border-radius:22px;padding:20px}}
+  
+    /* v12 intuitive questionnaire UI */
+    .wrap{max-width:920px;padding:34px 16px 70px}
+    .hero{background:#fff;border-color:#f0d9e2;box-shadow:none}
+    .progress{height:8px;background:#f6e8ee;margin:0 0 28px}
+    .qcard{border:0;box-shadow:none;background:transparent;padding:0;border-radius:0}
+    .qnum{font-size:15px;color:#b05f83;font-weight:900;margin-bottom:10px}
+    .qtitle{font-size:34px;line-height:1.35;letter-spacing:-.04em;margin:0 0 34px;color:#191519;font-weight:950;word-break:keep-all}
+    .hint{display:inline-block;margin:-18px 0 22px;padding:8px 12px;border-radius:999px;background:#fff3f7;border:1px solid #f0d9e2;color:#9a5574;font-weight:800}
+    .choices{gap:14px}
+    .choice{border:1.5px solid #f2dfe6;border-radius:18px;padding:20px 18px;background:#fff;box-shadow:none;line-height:1.55;min-height:84px;display:flex;flex-direction:column;justify-content:center;gap:6px}
+    .choice:hover{border-color:#d88da8;transform:none;background:#fffafa}
+    .choice.selected{background:#fff1f6;border-color:#d88da8;box-shadow:0 8px 26px rgba(216,141,168,.15);font-weight:inherit}
+    .choice-title{font-size:17px;font-weight:950;color:#171317;letter-spacing:-.02em}
+    .choice-desc{font-size:14px;color:#6d6067;font-weight:600}
+    .nav{margin-top:20px;justify-content:flex-start}
+    .btn{background:#e2adc0;color:#fff;min-width:74px;box-shadow:none}
+    .btn.secondary{background:#fff;color:#ca8da6;border:1px solid #f2dfe6}
+    .btn:disabled{opacity:.45;background:#f7edf1;color:#ca9caf}
+    .result-card{background:#fff;box-shadow:none;border-color:#f0d9e2}
+    .axis-card{border:0;border-top:1px solid #eee4e8;border-radius:0;padding:22px 4px;background:#fff}
+    .axis-title{font-size:18px;margin-bottom:14px;color:#3e3740}
+    .axis-track{height:12px;background:#f0f0f0}
+    .axis-fill-left{background:#70a9bd;border-radius:999px 0 0 999px}
+    .axis-fill-right{background:#70a9bd;border-radius:0 999px 999px 0}
+    .axis-card:nth-child(2) .axis-fill-left,.axis-card:nth-child(2) .axis-fill-right{background:#d7a737}
+    .axis-card:nth-child(3) .axis-fill-left,.axis-card:nth-child(3) .axis-fill-right{background:#62a77b}
+    .axis-card:nth-child(4) .axis-fill-left,.axis-card:nth-child(4) .axis-fill-right{background:#8e6aaa}
+    @media(max-width:620px){.wrap{padding:24px 16px 50px}.qtitle{font-size:28px}.choice{min-height:88px;padding:18px}.choice-title{font-size:16px}.choice-desc{font-size:13px}}
+
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hero" id="intro">
+    <div class="badge">💍 16가지 웨딩 드레스 유형 테스트</div>
+    <h1>나와 가장 잘 맞는<br/>웨딩 드레스샵 찾기</h1>
+    <p class="sub">드레스 무드, 소재, 홀 분위기, 포기 못하는 포인트를 바탕으로 16가지 유형 중 하나를 찾아요. 결과에서는 대표 드레스샵 1곳과 보조 추천샵 2곳, 공식 채널, 무드 비율을 보여줍니다.</p>
+    <div class="section"><button class="btn" onclick="startTest()">테스트 시작하기</button></div>
+  </div>
+  <div id="test" style="display:none">
+    <div class="progress"><span id="prog"></span></div>
+    <div id="questionArea"></div>
+  </div>
+  <div class="result" id="result"></div>
+</div>
+<script>
+const shops={
+ '누벨드블랑':{home:'',insta:'https://www.instagram.com/nouvelle_de_blanc_official/'},
+ '켈리손윤희':{home:'https://sonyunhui.com/',insta:'https://www.instagram.com/sonyunhui/'},
+ '시작바이이명순':{home:'',insta:'https://www.instagram.com/czacc_official/'},
+ '김선진끌로에':{home:'',insta:'https://www.instagram.com/cloe_kr/'},
+ '마리레나바이블랑':{home:'',insta:'https://www.instagram.com/marilenabyblanc_official/'},
+ '브라이드손윤희':{home:'https://sonyunhui.com/',insta:'https://www.instagram.com/bridesonyunhui/'},
+ '로브드K':{home:'',insta:'https://www.instagram.com/robedek.official/'},
+ '메종레브':{home:'https://revesbridal.co.kr/',insta:'https://www.instagram.com/maisonreve_official/'},
+ '로즈로사':{home:'http://www.roserosa.co.kr/',insta:'https://www.instagram.com/roserosa.wedding/'},
+ '비비드블랑':{home:'https://bbdeblanc.com/',insta:'https://www.instagram.com/bbdeblanc/'},
+ '아벨바이케이':{home:'https://abelbyk.co.kr/',insta:'https://www.instagram.com/abelbyk_official/'},
+ '황정아웨딩':{home:'',insta:'https://www.instagram.com/hwangjeongah_official/'},
+ '하우스오브에이미':{home:'https://houseofamy.com/',insta:'https://www.instagram.com/houseofamy_official/'},
+ '레이앤코':{home:'',insta:'https://www.instagram.com/raynco_official/'},
+ '케일라베넷':{home:'',insta:'https://www.instagram.com/kaylabennet_official/'},
+ '엔조최재훈':{home:'https://www.choijaehoon.co.kr/',insta:'https://www.instagram.com/choijaehoon.official/'},
+ '세인트모니카':{home:'https://monicablanche.com/',insta:'https://www.instagram.com/st.monica_official/'},
+ '르블랑':{home:'https://leblancdress.com/',insta:'https://www.instagram.com/le_blanc_wedding_official/'},
+ '클라우디아':{home:'https://www.claudiacompany.com/',insta:'https://www.instagram.com/claudiawedding_official/'},
+ '더화이트엘리자베스':{home:'',insta:'https://www.instagram.com/thewhite.elisabeth/'},
+ '에토프꾸띄르':{home:'',insta:'https://www.instagram.com/etoffecouture_official/'}
+};
+const types={
+ CRPF:{name:'로열 프린세스',mood:'👸 공주형',main:'누벨드블랑',subs:['켈리손윤희','로즈로사'],hall:'밝은홀 · 채플',tags:['오간자','풍성함','동화 같은 로망'],desc:'풍성한 스커트와 부드러운 로맨틱 무드가 잘 어울리는 공주형 취향입니다.'},
+ CRPB:{name:'클래식 스파클',mood:'👸 공주형',main:'켈리손윤희',subs:['비비드블랑','누벨드블랑'],hall:'호텔홀 · 어두운홀',tags:['클래식 공주','맑은 비즈','우아함'],desc:'공주 무드에 클래식한 우아함과 은은한 반짝임을 함께 원하는 취향입니다.'},
+ CRSF:{name:'퓨어 프린세스',mood:'👸 공주형',main:'시작바이이명순',subs:['로즈로사','아벨바이케이'],hall:'채플 · 야외 · 밝은홀',tags:['청순','자연스러움','소프트 라인'],desc:'과한 장식보다 맑고 청순한 분위기를 선호하는 순수한 공주형입니다.'},
+ CRSB:{name:'타임리스 엘레강스',mood:'👑 여왕형',main:'김선진끌로에',subs:['세인트모니카','르블랑'],hall:'밝은홀 · 호텔홀',tags:['미카도 실크','정통 클래식','품격'],desc:'시간이 지나도 촌스럽지 않은 고급스러운 클래식 웨딩에 가까운 취향입니다.'},
+ CMPF:{name:'소프트 로맨틱',mood:'🌸 첫사랑형',main:'마리레나바이블랑',subs:['하우스오브에이미','로브드K'],hall:'밝은홀',tags:['여성스러움','소프트 시크','절제된 로맨틱'],desc:'사랑스럽지만 너무 공주스럽지는 않은, 세련된 로맨틱 무드를 선호합니다.'},
+ CMPB:{name:'럭셔리 퀸',mood:'👑 여왕형',main:'브라이드손윤희',subs:['세인트모니카','클라우디아'],hall:'호텔홀 · 어두운홀',tags:['럭셔리 실크','품격','존재감'],desc:'실크의 고급감과 여왕 같은 품격을 가장 중요하게 보는 취향입니다.'},
+ CMSF:{name:'모던 클래식',mood:'🖤 패션형',main:'로브드K',subs:['메종레브','에토프꾸띄르'],hall:'호텔홀 · 밝은홀',tags:['미니멀','모던','정제된 라인'],desc:'군더더기 없이 세련되고, 핏과 구조미가 살아있는 드레스를 선호합니다.'},
+ CMSB:{name:'뉴욕 브라이드',mood:'🖤 패션형',main:'메종레브',subs:['로브드K','에토프꾸띄르'],hall:'호텔홀',tags:['뉴욕 감성','시크','패션 웨딩'],desc:'웨딩보다 스타일이 먼저 보이는 시크하고 감각적인 패션형 취향입니다.'},
+ GRPF:{name:'로맨틱 퀸',mood:'🌸 첫사랑형',main:'로즈로사',subs:['아벨바이케이','하우스오브에이미'],hall:'밝은홀 · 야외',tags:['플라워','로맨틱','화사함'],desc:'플라워 디테일과 부드러운 분위기가 강한 로맨틱 취향입니다.'},
+ GRPB:{name:'글램 스타',mood:'✨ 스타형',main:'비비드블랑',subs:['더화이트엘리자베스','켈리손윤희'],hall:'어두운홀 · 호텔홀',tags:['맑은 비즈','입장감','스포트라이트'],desc:'문이 열리는 순간 시선이 집중되는 반짝임과 입장감을 선호합니다.'},
+ GRSF:{name:'내추럴 로맨틱',mood:'🌸 첫사랑형',main:'아벨바이케이',subs:['로즈로사','하우스오브에이미'],hall:'밝은홀 · 채플',tags:['플라워','내추럴','사랑스러움'],desc:'자연스럽고 사랑스러운 분위기 안에서 은근한 존재감을 원하는 취향입니다.'},
+ GRSB:{name:'호텔 스타',mood:'✨ 스타형',main:'황정아웨딩',subs:['클라우디아','레이앤코'],hall:'호텔홀 · 어두운홀',tags:['실버 비즈','호텔 웨딩','화려함'],desc:'호텔 조명 아래 가장 빛나는 화려함과 존재감을 원하는 취향입니다.'},
+ GMPF:{name:'로맨틱 무드',mood:'🌸 첫사랑형',main:'하우스오브에이미',subs:['로즈로사','아벨바이케이'],hall:'야외 · 밝은홀',tags:['무드','플라워','감성 웨딩'],desc:'사랑스럽고 감성적인 무드를 패션감 있게 풀어내는 취향입니다.'},
+ GMPB:{name:'레드카펫 스타',mood:'✨ 스타형',main:'레이앤코',subs:['황정아웨딩','비비드블랑'],hall:'어두운홀 · 호텔홀',tags:['레드카펫','여배우 무드','화려한 비즈'],desc:'드레스 자체가 주인공처럼 보이는 레드카펫 무드를 선호합니다.'},
+ GMSF:{name:'런웨이 브라이드',mood:'🖤 패션형',main:'케일라베넷',subs:['메종레브','엔조최재훈'],hall:'호텔홀 · 어두운홀',tags:['런웨이','머메이드','하이패션'],desc:'슬림한 실루엣과 감각적인 스타일링이 강한 패션형 취향입니다.'},
+ GMSB:{name:'시그니처 스타',mood:'✨ 스타형',main:'엔조최재훈',subs:['클라우디아','황정아웨딩'],hall:'호텔홀 · 어두운홀',tags:['구조적','하이패션 글램','시그니처'],desc:'강한 실루엣과 화려함을 동시에 원하는 시그니처 글램 취향입니다.'}
+};
+const moodKeys=['👑 여왕형','👸 공주형','✨ 스타형','🌸 첫사랑형','🖤 패션형'];
+const questions=[
+ {t:'드레스 투어 첫날, 거울 앞에 선 순간 “이 모습이면 바로 계약할 것 같다!” 싶은 장면은?',multi:false,c:[['왕실 연회장에 들어서는 왕비 같은 모습 — 고급스럽고 압도적인 분위기. 많은 장식보다 품격이 먼저 느껴진다.',{CRSB:2,CMPB:2}],['디즈니 영화 속 주인공 같은 모습 — 풍성한 드레스가 펼쳐지고 오늘만큼은 진짜 공주가 된 느낌.',{CRPF:2,CRPB:2}],['레드카펫을 걷는 스타 같은 모습 — 조명을 받을 때마다 반짝이고 모두의 시선이 집중되는 느낌.',{GRPB:2,GRSB:2,GMPB:1}],['로맨스 영화 여주인공 같은 모습 — 사랑스럽고 부드럽고 사진만 봐도 행복해 보이는 느낌.',{GRPF:2,GRSF:2,CRSF:1}],['패션잡지 커버를 찍는 모델 같은 모습 — 군더더기 없이 세련되고 요즘 감성의 멋있는 신부.',{CMSF:2,CMSB:2,GMSF:1}]]},
+ {t:'드레스 투어를 단 1곳만 갈 수 있다면?',multi:false,c:[['고급스러운 실크 드레스가 유명한 곳 — 원단의 힘만으로 우아하고 부티나는 분위기',{CRSB:2,CMPB:3,CMSF:1}],['풍성한 공주 드레스가 유명한 곳 — 스커트가 드라마틱하게 펼쳐지는 로망',{CRPF:3,CRPB:2}],['비즈와 반짝임이 유명한 곳 — 조명 아래 입장감이 확 살아나는 스타일',{GRPB:3,GRSB:2,GMPB:1}],['플라워와 로맨틱 무드가 유명한 곳 — 청순하고 사랑스러운 사진이 남는 스타일',{GRPF:3,GRSF:2,GMPF:1}],['세련된 핏과 패션감이 유명한 곳 — 깔끔하고 힙한 웨딩 화보 같은 스타일',{CMSB:3,GMSF:2,CMSF:1}]]},
+ {t:'가장 끌리는 소재/디테일은?',hint:'최대 2개까지 선택 가능',multi:true,max:2,c:[['미카도 실크',{CRSB:4,CMPB:4,CMSF:2}],['오간자',{CRPF:4,CRPB:2,GRPF:2}],['맑은 비즈',{GRPB:4,CRPB:3}],['플라워 아플리케',{GRPF:4,GRSF:3,GMPF:2}],['실버 비즈',{GRSB:4,GMPB:3,GRPB:1}],['글리터·스팽글',{GMPB:4,GMSB:2,GRSB:2}]]},
+ {t:'드레스 볼륨은?',multi:false,c:[['A라인',{CRSB:2,CMSF:1,GRSF:1}],['풍성 A라인',{CRPF:2,CRPB:2,GRPF:1}],['벨라인',{CRPF:3,CRPB:2,GRPB:1}],['머메이드',{GMSF:3,CMSB:2,GMPB:1}],['엠파이어 라인',{CRSF:2,GRSF:2,GMPF:1}]]},
+ {t:'드레스를 볼 때 가장 먼저 보는 부분은?',multi:false,c:[['원단의 고급스러움',{CMPB:3,CRSB:2}],['스커트 볼륨',{CRPF:3,CRPB:2}],['반짝임과 비즈',{GRPB:3,GRSB:2}],['레이스·플라워 디테일',{GRPF:3,GRSF:2}],['전체적인 라인과 핏',{CMSB:3,GMSF:2,CMSF:1}]]},
+ {t:'가장 끌리는 상체 디자인은?',multi:false,c:[['스퀘어넥',{CRSB:2,CMSF:1,CMPB:1}],['탑드레스',{CRPF:2,GRPB:2,CRPB:1}],['오프숄더',{GRPF:2,GRSF:2,CRPF:1}],['드레이프넥',{CMPB:2,CRSB:1,GMPF:1}],['딥브이넥',{GMSF:2,GMPB:2,CMSB:1}]]},
+ {t:'드레스에서 가장 중요한 것은?',multi:false,c:[['품격',{CMPB:3,CRSB:2}],['로망',{CRPF:3,CRPB:2}],['화려함',{GRSB:3,GRPB:2,GMPB:1}],['사랑스러움',{GRPF:2,GRSF:2,CRSF:1}],['세련미',{CMSB:3,CMSF:2,GMSF:1}]]},
+ {t:'본식 홀 분위기는 어떤가요?',multi:false,c:[['클래식 호텔 예식장',{CMPB:2,GRSB:3,GMSB:2,CRSB:1}],['어두운 홀',{GRPB:3,GRSB:3,GMPB:2,GMSB:1}],['밝은 홀',{CRSB:2,CRSF:2,GRPF:2,CMSF:1}],['야외 예식 또는 채플 예식',{GRPF:3,CRSF:2,GRSF:2,GMPF:1}],['아직 정하지 못했다',{}]]},
+ {t:'예산 제한 없이 딱 하나만 업그레이드할 수 있다면?',multi:false,c:[['최고급 미카도 실크',{CMPB:3,CRSB:3}],['더욱 풍성한 스커트',{CRPF:3,CRPB:2}],['수작업 비즈 추가',{GRPB:3,GRSB:2,GMPB:1}],['플라워 아플리케 추가',{GRPF:3,GRSF:2,GMPF:1}],['완벽한 맞춤 핏',{CMSB:3,GMSF:2,CMSF:1}]]},
+ {t:'드레스 투어 후 가장 후회할 것 같은 상황은?',multi:false,c:[['미카도 실크 드레스를 안 입어본 것',{CRSB:3,CMPB:3}],['풍성한 드레스를 안 입어본 것',{CRPF:3,CRPB:2}],['반짝이는 드레스를 안 입어본 것',{GRPB:3,GRSB:2,GMPB:1}],['플라워 드레스를 안 입어본 것',{GRPF:3,GRSF:2}],['머메이드 드레스를 안 입어본 것',{GMSF:4,CMSB:2}]]},
+ {t:'드레스 투어 마지막 날, 최종 선택 직전이라면 무엇 때문에 가장 고민될 것 같나요?',multi:false,c:[['실크의 고급스러움',{CMPB:4,CRSB:3}],['풍성한 공주 무드',{CRPF:4,CRPB:3}],['반짝이는 비즈',{GRPB:4,GRSB:3,GMPB:1}],['플라워 디테일',{GRPF:4,GRSF:3,GMPF:1}],['세련된 핏',{CMSB:4,GMSF:3,CMSF:1}]]}
+];
+let current=0, answers=Array(questions.length).fill(null);
+function startTest(){document.getElementById('intro').style.display='none';document.getElementById('test').style.display='block';renderQ()}
+function formatChoice(text){
+ const parts=text.split(' — ');
+ if(parts.length>1){return `<div class="choice-title">${parts[0]}</div><div class="choice-desc">${parts.slice(1).join(' — ')}</div>`}
+ return `<div class="choice-title">${text}</div>`
+}
+function renderQ(){const q=questions[current];document.getElementById('prog').style.width=((current)/questions.length*100)+'%';let html=`<div class="qcard active"><div class="qnum">Q${current+1} / ${questions.length}</div><div class="qtitle">${q.t}</div>${q.hint?`<div class="hint">${q.hint}</div>`:''}<div class="choices">`;q.c.forEach((x,i)=>{let sel=q.multi?(answers[current]||[]).includes(i):answers[current]===i;html+=`<div class="choice ${sel?'selected':''}" onclick="selectChoice(${i})">${formatChoice((i+1)+'. '+x[0])}</div>`});html+=`</div><div class="nav"><button class="btn secondary" onclick="prevQ()" ${current===0?'disabled':''}>이전</button><button class="btn" onclick="nextQ()" ${answers[current]===null || (Array.isArray(answers[current])&&answers[current].length===0)?'disabled':''}>${current===questions.length-1?'결과 보기':'다음'}</button></div></div>`;document.getElementById('questionArea').innerHTML=html}
+function selectChoice(i){const q=questions[current];if(q.multi){let arr=answers[current]||[];if(arr.includes(i)) arr=arr.filter(v=>v!==i); else {if(arr.length>=q.max){alert(`최대 ${q.max}개까지 선택할 수 있어요.`);return} arr=[...arr,i]} answers[current]=arr}else{answers[current]=i}renderQ()}
+function prevQ(){if(current>0){current--;renderQ()}}
+function nextQ(){if(current<questions.length-1){current++;renderQ()}else showResult()}
+function addScore(score,obj){Object.entries(obj).forEach(([k,v])=>score[k]=(score[k]||0)+v)}
+function showResult(){let score={};Object.keys(types).forEach(k=>score[k]=0);answers.forEach((ans,qi)=>{const q=questions[qi];if(Array.isArray(ans)) ans.forEach(i=>addScore(score,q.c[i][1])); else addScore(score,q.c[ans][1])});let best=Object.entries(score).sort((a,b)=>b[1]-a[1])[0][0];renderResult(best,score)}
+function axisScores(score){
+ const axes=[
+  {title:'축1 · Classic ↔ Glam',left:'C',right:'G',leftName:'Classic · 여왕형',rightName:'Glam · 스타형'},
+  {title:'축2 · Romantic ↔ Modern',left:'R',right:'M',leftName:'Romantic · 공주/첫사랑형',rightName:'Modern · 패션형'},
+  {title:'축3 · Princess ↔ Slim',left:'P',right:'S',leftName:'Princess · 풍성',rightName:'Slim · 슬림'},
+  {title:'축4 · Flower ↔ Beads',left:'F',right:'B',leftName:'Flower · 플라워',rightName:'Beads · 비즈'}
+ ];
+ return axes.map(ax=>{
+  let l=0,r=0;
+  Object.entries(score).forEach(([code,val])=>{
+   if(code.includes(ax.left)) l+=val;
+   if(code.includes(ax.right)) r+=val;
+  });
+  let total=l+r||1;
+  let lp=Math.round(l/total*100); let rp=100-lp;
+  return {...ax,lp,rp};
+ });
+}
+function axisBar(ax){
+ return `<div class="axis-card"><div class="axis-title">${ax.title}</div><div class="axis-head"><div><div class="axis-pct">${ax.lp}%</div><div class="axis-name">${ax.leftName}</div></div><div style="text-align:right"><div class="axis-pct">${ax.rp}%</div><div class="axis-name">${ax.rightName}</div></div></div><div class="axis-track"><div class="axis-fill-left" style="width:${ax.lp}%"></div><div class="axis-fill-right" style="width:${ax.rp}%"></div></div><div class="axis-foot"><span class="axis-code">${ax.left}</span><span class="axis-code">${ax.right}</span></div></div>`;
+}
+function shopCard(name,rank){const s=shops[name]||{};let links='';if(s.home)links+=`<a class="linkbtn" target="_blank" href="${s.home}">공식 홈페이지</a>`;if(s.insta)links+=`<a class="linkbtn insta" target="_blank" href="${s.insta}">공식 인스타그램</a>`;return `<div class="shop"><div class="shop-top"><div><div class="rank">${rank}</div><div class="shop-name">${name}</div></div></div><div class="links">${links||'<span class="small">공식 채널 확인 중</span>'}</div></div>`}
+function renderResult(code,score){document.getElementById('test').style.display='none';const t=types[code];let bars=axisScores(score).map(axisBar).join('');let shopHtml=shopCard(t.main,'대표 드레스샵')+t.subs.map((s,i)=>shopCard(s,`보조 추천 ${i+1}`)).join('');document.getElementById('result').className='result show';document.getElementById('result').innerHTML=`<div class="result-card"><div class="type-code">${code}</div><div class="type-name">${t.name}</div><div class="mood">${t.mood}</div><p class="desc">${t.desc}</p><div class="tags">${t.tags.map(x=>`<span class="tag">${x}</span>`).join('')}<span class="tag">추천 홀: ${t.hall}</span></div><h3>4축 성향 분석</h3><div class="bars">${bars}</div><h3>추천 드레스샵</h3><div class="shops">${shopHtml}</div><div class="footer-actions"><button class="btn" onclick="location.reload()">다시 테스트하기</button></div><p class="small">결과는 취향 기반 추천이며, 실제 피팅 결과·예식장 조명·체형·예산에 따라 달라질 수 있어요.</p></div>`;window.scrollTo({top:0,behavior:'smooth'})}
+</script>
+</body>
+</html>

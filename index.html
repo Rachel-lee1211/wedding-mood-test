@@ -75,7 +75,7 @@ const shops={
  '브라이드손윤희':{home:'http://sonyunhui.com/',insta:'https://www.instagram.com/bridesonyunhui/'},
  '로브드K':{home:'https://www.robedek.com/',insta:'https://www.instagram.com/robedek.official/'},
  '메종레브':{home:'https://revesbridal.co.kr/',insta:'https://www.instagram.com/maisonreve_official/'},
- '로즈로사':{home:'http://www.roserosa.co.kr/',insta:'https://www.instagram.com/roserosa.wedding/'},
+ '로즈로사':{home:'',insta:'https://www.instagram.com/roserosa.wedding/'},
  '비비드블랑':{home:'http://bbdeblanc.com/',insta:'https://www.instagram.com/bbdeblanc/'},
  '아벨바이케이':{home:'http://abelbyk.co.kr/',insta:'https://www.instagram.com/abelbyk_official/'},
  '황정아웨딩':{home:'https://hwangjeongah.s-wed.co.kr/',insta:'https://www.instagram.com/hwangjeongah_official/'},
@@ -162,9 +162,19 @@ function axisBar(ax){
  return `<div class="axis-card"><div class="axis-title">${ax.title}</div><div class="axis-head"><div><div class="axis-pct">${ax.lp}%</div><div class="axis-name">${ax.leftName}</div></div><div style="text-align:right"><div class="axis-pct">${ax.rp}%</div><div class="axis-name">${ax.rightName}</div></div></div><div class="axis-track">${fill}</div><div class="axis-foot"><span class="axis-code">${ax.left}</span><span class="axis-code">${ax.right}</span></div></div>`;
 }
 // CODEX: 결과 페이지에 TOP3 적합도와 추천 홀/소재/실루엣을 명시합니다.
-function resultDetails(code,t){
+function resultDetails(code,t){ /* CLAUDE: 유형 코드 기반으로 어울리는 소재 2개를 고정 추천 */
  const silhouettes={P:'풍성 A라인 · 벨라인',S:'슬림 A라인 · 머메이드'};
- return {hall:t.hall,material:t.tags.slice(0,2).join(' · '),silhouette:silhouettes[code[2]]||'체형 맞춤 실루엣'};
+ const materials={
+  CRPF:'오간자 · 소프트 튤',CRPB:'오간자 · 맑은 비즈',
+  CRSF:'소프트 새틴 · 쉬폰',CRSB:'미카도 실크 · 새틴',
+  CMPF:'소프트 쉬폰 · 플라워',CMPB:'미카도 실크 · 크레이프',
+  CMSF:'크레이프 · 미카도 실크',CMSB:'크레이프 · 마이크로 새틴',
+  GRPF:'플라워 아플리케 · 오간자',GRPB:'맑은 비즈 · 오간자',
+  GRSF:'플라워 아플리케 · 쉬폰',GRSB:'실버 비즈 · 새틴',
+  GMPF:'플라워 아플리케 · 쉬폰',GMPB:'글리터 · 화려한 비즈',
+  GMSF:'크레이프 · 마이크로 새틴',GMSB:'헤비 새틴 · 비즈'
+ };
+ return {hall:t.hall,material:materials[code]||t.tags.slice(0,2).join(' · '),silhouette:silhouettes[code[2]]||'체형 맞춤 실루엣'};
 }
 function shopCard(name,rank,fit){const s=shops[name]||{};let links='';if(s.home)links+=`<a class="linkbtn" target="_blank" href="${s.home}">공식 홈페이지</a>`;if(s.insta)links+=`<a class="linkbtn insta" target="_blank" href="${s.insta}">공식 인스타그램</a>`;return `<div class="shop"><div class="shop-top"><div><div class="rank">${rank}</div><div class="shop-name">${name}</div></div><div class="shop-fit">${fit}%</div></div><div class="links">${links||'<span class="small">공식 채널 확인 중</span>'}</div></div>`}
 function renderResult(code,score){document.getElementById('test').style.display='none';const t=types[code];const details=resultDetails(code,t);let bars=axisScores(score).map(axisBar).join('');let shopHtml=shopCard(t.main,'TOP 1',96)+t.subs.map((s,i)=>shopCard(s,`TOP ${i+2}`,i===0?91:87)).join('');document.getElementById('result').className='result show';document.getElementById('result').innerHTML=`<div class="result-card"><div class="type-code">${code}</div><div class="type-name">${t.name}</div><div class="mood">${t.mood}</div><p class="desc">${t.desc}</p><div class="result-meta"><span class="tag">추천 홀: ${details.hall}</span><span class="tag">추천 소재: ${details.material}</span><span class="tag">추천 실루엣: ${details.silhouette}</span></div><div class="tags">${t.tags.map(x=>`<span class="tag">${x}</span>`).join('')}</div><h3>4축 성향 분석</h3><div class="bars">${bars}</div><h3>추천 드레스샵 TOP3</h3><div class="shops">${shopHtml}</div><div class="footer-actions"><button class="btn" onclick="location.reload()">다시 테스트하기</button></div><p class="small">결과는 취향 기반 추천이며, 실제 피팅 결과·예식장 조명·체형·예산에 따라 달라질 수 있어요.</p></div>`;window.scrollTo({top:0,behavior:'smooth'})}

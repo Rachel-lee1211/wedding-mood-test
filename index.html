@@ -388,6 +388,12 @@ function saveImage(e){
 }
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script><!-- CLAUDE -->
-<div class="version">v0.02.3</div>
+<div class="version">v0.02.3 · 👀 <span id="visitCount"></span></div><!-- CLAUDE -->
+<script>// CLAUDE: 페이지 로드 시 CountAPI로 방문자 수 카운트 및 표시
+fetch('https://api.countapi.xyz/hit/uwicom/wedding-mood-test')
+  .then(r=>r.json())
+  .then(d=>{if(d.value)document.getElementById('visitCount').textContent=d.value.toLocaleString()+'명';})
+  .catch(()=>{});
+</script>
 </body>
 </html>

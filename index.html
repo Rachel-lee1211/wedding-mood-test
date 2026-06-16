@@ -35,6 +35,22 @@
     .type-name{font-size:34px;margin:4px 0 8px;font-weight:950}
     .mood{font-size:18px;font-weight:900;margin-bottom:8px}
     .desc{color:var(--muted);line-height:1.7;margin:0 0 20px}
+    /* CODEX: CLAUDE 결과 화면에는 필수 항목인 4축 바와 추천 홀/소재/실루엣 요약이 빠져 있었습니다. */
+    .result-meta{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 6px}
+    .bars{display:grid;gap:18px;margin:18px 0 22px}
+    .axis-card{border-top:1px solid #eee4e8;padding:18px 0 0}
+    .axis-title{font-size:16px;font-weight:950;color:#3e3740;margin-bottom:10px;text-align:center}
+    .axis-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:8px;gap:12px}
+    .axis-pct{font-size:20px;font-weight:950;color:#30272c}
+    .axis-name{font-size:13px;color:var(--muted);font-weight:800}
+    .axis-track{position:relative;height:12px;border-radius:999px;background:#f7edf1;overflow:hidden}
+    .axis-fill-left{position:absolute;left:0;top:0;height:100%;border-radius:999px 0 0 999px;background:#70a9bd}
+    .axis-fill-right{position:absolute;right:0;top:0;height:100%;border-radius:0 999px 999px 0;background:#70a9bd}
+    .axis-card:nth-child(2) .axis-fill-left,.axis-card:nth-child(2) .axis-fill-right{background:#d7a737}
+    .axis-card:nth-child(3) .axis-fill-left,.axis-card:nth-child(3) .axis-fill-right{background:#62a77b}
+    .axis-card:nth-child(4) .axis-fill-left,.axis-card:nth-child(4) .axis-fill-right{background:#8e6aaa}
+    .axis-foot{display:flex;justify-content:space-between;margin-top:7px}
+    .axis-code{font-size:12px;font-weight:950;color:var(--dark)}
     /* CLAUDE: 드레스 DNA 태그 영역 */
     .dna-section{margin:20px 0}
     .dna-title{font-size:15px;font-weight:900;color:#4a3b43;margin:0 0 12px}
@@ -46,6 +62,7 @@
     .shop-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
     .rank{font-size:13px;color:var(--dark);font-weight:900}
     .shop-name{font-size:21px;font-weight:950}
+    .shop-fit{font-size:20px;font-weight:950;color:#b05f83;white-space:nowrap}
     .links{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
     .linkbtn{display:inline-block;text-decoration:none;background:#2d2328;color:#fff;padding:9px 12px;border-radius:999px;font-size:13px;font-weight:900}
     .linkbtn.insta{background:#c4648e}
@@ -267,21 +284,63 @@ function showResult(){
   renderResult(best,scores);
 }
 
+// CODEX: CLAUDE 결과에는 4축 성향 분석 바가 빠져 있어 태그 점수 기반으로 좌우 비율을 복원합니다.
+function sumTags(scores,tags){return tags.reduce((sum,tag)=>sum+(scores[tag]||0),0)}
+function axisScores(scores){
+  const axes=[
+    {title:'Classic ↔ Glam',leftName:'Classic · 여왕형',rightName:'Glam · 스타형',left:'Classic',right:'Glam',lTags:['classic','queen','silk','elegant'],rTags:['glam','star','silver','glitter','beads']},
+    {title:'Romantic ↔ Modern',leftName:'Romantic · 첫사랑형',rightName:'Modern · 패션형',left:'Romantic',right:'Modern',lTags:['romance','pure','flower','organza'],rTags:['fashion','hline','mermaid','deepv']},
+    {title:'Princess ↔ Slim',leftName:'Princess · 풍성',rightName:'Slim · 슬림',left:'Princess',right:'Slim',lTags:['princess','bell','aline','top'],rTags:['mermaid','hline','deepv']},
+    {title:'Flower ↔ Beads',leftName:'Flower · 플라워',rightName:'Beads · 비즈',left:'Flower',right:'Beads',lTags:['flower','organza','romance'],rTags:['beads','silver','glitter']}
+  ];
+  return axes.map(ax=>{
+    const l=sumTags(scores,ax.lTags),r=sumTags(scores,ax.rTags),total=l+r||1;
+    const lp=Math.round(l/total*100),rp=100-lp;
+    return {...ax,lp,rp};
+  });
+}
+function axisBar(ax){
+  const fill=ax.lp>=ax.rp
+    ? `<div class="axis-fill-left" style="width:${ax.lp}%"></div>`
+    : `<div class="axis-fill-right" style="width:${ax.rp}%"></div>`;
+  return `<div class="axis-card"><div class="axis-title">${ax.title}</div><div class="axis-head"><div><div class="axis-pct">${ax.lp}%</div><div class="axis-name">${ax.leftName}</div></div><div style="text-align:right"><div class="axis-pct">${ax.rp}%</div><div class="axis-name">${ax.rightName}</div></div></div><div class="axis-track">${fill}</div><div class="axis-foot"><span class="axis-code">${ax.left}</span><span class="axis-code">${ax.right}</span></div></div>`;
+}
+
+// CODEX: CLAUDE 결과에는 추천 홀/소재/실루엣이 별도 표시되지 않아 타입 태그에서 대표 항목을 뽑습니다.
+function pickFirst(tags,candidates,fallback){return candidates.find(tag=>tags.includes(tag))||fallback}
+function resultDetails(best){
+  const hall=pickFirst(best.tags,['hotel','darkhall','brighthall','chapel'],'brighthall');
+  const materialTags=best.tags.filter(tag=>['silk','organza','beads','flower','silver','glitter'].includes(tag)).slice(0,2);
+  const silhouette=pickFirst(best.tags,['bell','aline','mermaid','hline'],'aline');
+  return {
+    hall:tagLabels[hall]||hall,
+    material:materialTags.map(tag=>tagLabels[tag]||tag).join(' · ')||'취향 맞춤 소재',
+    silhouette:tagLabels[silhouette]||silhouette
+  };
+}
+function shopFit(best,i){
+  const top=Math.min(99,Math.max(90,72+(best.score||0)));
+  return Math.max(80,top-(i*5));
+}
+
 // CLAUDE: 업체 카드 — 기존 shopCard 함수에서 shops 오브젝트로 링크 연결
-function shopCard(name,rank){
+// CODEX: CLAUDE 결과에는 샵별 적합도 %가 없어 fit 인자를 추가했습니다.
+function shopCard(name,rank,fit){
   const s=shops[name]||{};
   let links='';
   if(s.home) links+=`<a class="linkbtn" target="_blank" href="${s.home}">공식 홈페이지</a>`;
   if(s.insta) links+=`<a class="linkbtn insta" target="_blank" href="${s.insta}">공식 인스타그램</a>`;
-  return `<div class="shop"><div class="shop-top"><div><div class="rank">${rank}</div><div class="shop-name">${name}</div></div></div><div class="links">${links||'<span class="small">공식 채널 확인 중</span>'}</div></div>`;
+  return `<div class="shop"><div class="shop-top"><div><div class="rank">${rank}</div><div class="shop-name">${name}</div></div><div class="shop-fit">${fit}%</div></div><div class="links">${links||'<span class="small">공식 채널 확인 중</span>'}</div></div>`;
 }
 
 function renderResult(best,scores){
   document.getElementById('test').style.display='none';
   const topTags=best.tags.slice(0,6).map(t=>`<span class="tag">${tagLabels[t]||t}</span>`).join('');
-  const shopHtml=best.shops.map((name,i)=>shopCard(name,`TOP ${i+1}`)).join('');
+  const detail=resultDetails(best);
+  const bars=axisScores(scores).map(axisBar).join('');
+  const shopHtml=best.shops.map((name,i)=>shopCard(name,`TOP ${i+1}`,shopFit(best,i))).join('');
   document.getElementById('result').className='result show';
-  document.getElementById('result').innerHTML=`<div class="result-card"><div class="mood">${best.mood}</div><div class="type-name">${best.name}</div><p class="desc">${best.desc}</p><div class="dna-section"><div class="dna-title">나의 드레스 DNA</div><div class="tags">${topTags}</div></div><h3>추천 드레스샵 TOP3</h3><div class="shops">${shopHtml}</div><div class="footer-actions"><button class="btn" onclick="location.reload()">다시 테스트하기</button><button class="btn secondary" onclick="saveImage(event)">이미지 저장</button></div><p class="small">결과는 취향 기반 추천이며, 실제 피팅 결과·예식장 조명·체형·예산에 따라 달라질 수 있어요.</p></div>`;
+  document.getElementById('result').innerHTML=`<div class="result-card"><div class="mood">${best.mood}</div><div class="type-name">${best.name}</div><p class="desc">${best.desc}</p><div class="result-meta"><span class="tag">추천 홀: ${detail.hall}</span><span class="tag">추천 소재: ${detail.material}</span><span class="tag">추천 실루엣: ${detail.silhouette}</span></div><div class="dna-section"><div class="dna-title">나의 드레스 DNA</div><div class="tags">${topTags}</div></div><h3>4축 성향 분석</h3><div class="bars">${bars}</div><h3>추천 드레스샵 TOP3</h3><div class="shops">${shopHtml}</div><div class="footer-actions"><button class="btn" onclick="location.reload()">다시 테스트하기</button><button class="btn secondary" onclick="saveImage(event)">이미지 저장</button></div><p class="small">결과는 취향 기반 추천이며, 실제 피팅 결과·예식장 조명·체형·예산에 따라 달라질 수 있어요.</p></div>`;
   window.scrollTo({top:0,behavior:'smooth'});
 }
 

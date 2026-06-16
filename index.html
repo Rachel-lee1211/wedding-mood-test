@@ -390,9 +390,9 @@ function saveImage(e){
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script><!-- CLAUDE -->
 <div class="version">v0.02.3 · 👀 <span id="visitCount"></span></div><!-- CLAUDE -->
 <script>// CLAUDE: 페이지 로드 시 CountAPI로 방문자 수 카운트 및 표시
-fetch('https://api.countapi.xyz/hit/uwicom/wedding-mood-test')
+fetch('https://api.counterapi.dev/v1/uwicom/wedding-mood-test/up')
   .then(r=>r.json())
-  .then(d=>{if(d.value)document.getElementById('visitCount').textContent=d.value.toLocaleString()+'명';})
+  .then(d=>{if(d.count)document.getElementById('visitCount').textContent=d.count.toLocaleString()+'명';})
   .catch(()=>{});
 </script>
 </body>

@@ -137,7 +137,8 @@ const shops={
  '르블랑':{home:'http://leblancdress.com/',insta:'https://www.instagram.com/le_blanc_wedding_official/'},
  '클라우디아':{home:'http://www.claudiacompany.com/',insta:'https://www.instagram.com/claudiawedding_official/'},
  '더화이트엘리자베스':{home:'',insta:'https://www.instagram.com/thewhite.elisabeth/'},
- '에토프꾸띄르':{home:'',insta:'https://www.instagram.com/etoffecouture_official/'}
+ '에토프꾸띄르':{home:'',insta:'https://www.instagram.com/etoffecouture_official/'},
+ '셀린아뜰리에':{home:'',insta:'https://www.instagram.com/celineatelier_wedding'}
 };
 
 // CLAUDE: 새 질문 10문항 — 태그 기반 점수 방식
@@ -216,20 +217,20 @@ const questions=[
 // CLAUDE: 16가지 새 유형 — tags 기반 점수 매칭
 const types={
   // CLAUDE: 각 유형에 img 필드 추가 — img/ 폴더 기준 상대경로
-  CrystalPrincess:{name:'크리스탈 프린세스',mood:'👸 공주형',desc:'맑은 비즈와 화사한 실루엣으로 동화 같은 로망을 완성하는 타입입니다.',shops:['켈리손윤희','비비드블랑','누벨드블랑'],tags:['princess','bell','beads','top','offshoulder','brighthall','chapel'],img:'img/CrystalPrincess.png'},
-  PurePrincess:{name:'퓨어 프린세스',mood:'👸 공주형',desc:'과한 장식보다 맑고 깨끗한 분위기가 잘 어울리는 청순 공주 타입입니다.',shops:['누벨드블랑','시작바이이명순','아벨바이케이'],tags:['princess','aline','organza','pure','square','top','brighthall','chapel'],img:'img/PurePrincess.png'},
+  CrystalPrincess:{name:'크리스탈 프린세스',mood:'👸 공주형',desc:'맑은 비즈와 화사한 실루엣으로 동화 같은 로망을 완성하는 타입입니다.',shops:['비비드블랑','켈리손윤희','누벨드블랑'],tags:['princess','bell','beads','top','offshoulder','brighthall','chapel'],img:'img/CrystalPrincess.png'},
+  PurePrincess:{name:'퓨어 프린세스',mood:'👸 공주형',desc:'과한 장식보다 맑고 깨끗한 분위기가 잘 어울리는 청순 공주 타입입니다.',shops:['누벨드블랑','시작바이이명순','셀린아뜰리에'],tags:['princess','aline','organza','pure','square','top','brighthall','chapel'],img:'img/PurePrincess.png'},
   RoyalPrincess:{name:'로열 프린세스',mood:'👸 공주형',desc:'공주 무드에 클래식한 품격을 더한 우아한 로열 타입입니다.',shops:['켈리손윤희','모니카블랑쉬','르블랑'],tags:['princess','bell','classic','beads','silk','offshoulder','drape','hotel'],img:'img/RoyalPrincess.png'},
-  RomanticPrincess:{name:'로맨틱 프린세스',mood:'🌸 첫사랑형',desc:'사랑스럽고 화사한 분위기 안에 플라워 디테일이 잘 어울리는 타입입니다.',shops:['로즈로사','아벨바이케이','하우스오브에이미'],tags:['romance','princess','aline','bell','flower','organza','offshoulder','brighthall','chapel'],img:'img/RomanticPrincess.png'},
+  RomanticPrincess:{name:'로맨틱 프린세스',mood:'🌸 첫사랑형',desc:'사랑스럽고 화사한 분위기 안에 플라워 디테일이 잘 어울리는 타입입니다.',shops:['로즈로사','아벨바이케이','셀린아뜰리에'],tags:['romance','princess','aline','bell','flower','organza','offshoulder','brighthall','chapel'],img:'img/RomanticPrincess.png'},
   TimelessQueen:{name:'타임리스 퀸',mood:'👑 여왕형',desc:'시간이 지나도 촌스럽지 않은 정통 클래식 웨딩이 잘 어울리는 타입입니다.',shops:['브라이드손윤희','모니카블랑쉬','르블랑'],tags:['queen','classic','silk','square','drape','aline','hline','hotel','brighthall'],img:'img/TimelessQueen.png'},
   RoyalElegance:{name:'로열 엘레강스',mood:'👑 여왕형',desc:'우아한 실루엣과 고급스러운 원단감이 돋보이는 품격 있는 타입입니다.',shops:['모니카블랑쉬','브라이드손윤희','하우스오브에이미'],tags:['queen','elegant','silk','organza','drape','square','hotel'],img:'img/RoyalElegance.png'},
-  ModernQueen:{name:'모던 퀸',mood:'👑 여왕형',desc:'과하지 않지만 세련되고 고급스러운 분위기를 원하는 타입입니다.',shops:['르블랑','메종레브','로브드K'],tags:['queen','fashion','hline','mermaid','silk','square','drape','hotel','brighthall'],img:'img/ModernQueen.png'},
-  GrandQueen:{name:'그랜드 퀸',mood:'👑 여왕형',desc:'입장한 순간부터 압도적인 존재감과 품격을 원하는 타입입니다.',shops:['모니카블랑쉬','브라이드손윤희','르블랑'],tags:['queen','classic','bell','aline','silk','beads','offshoulder','drape','hotel','darkhall'],img:'img/GrandQueen.png'},
+  ModernQueen:{name:'모던 퀸',mood:'👑 여왕형',desc:'과하지 않지만 세련되고 고급스러운 분위기를 원하는 타입입니다.',shops:['아벨바이케이','메종레브','로브드K'],tags:['queen','fashion','hline','mermaid','silk','square','drape','hotel','brighthall'],img:'img/ModernQueen.png'},
+  GrandQueen:{name:'그랜드 퀸',mood:'👑 여왕형',desc:'입장한 순간부터 압도적인 존재감과 품격을 원하는 타입입니다.',shops:['모니카블랑쉬','브라이드손윤희','더화이트엘리자베스'],tags:['queen','classic','bell','aline','silk','beads','offshoulder','drape','hotel','darkhall'],img:'img/GrandQueen.png'},
   GlamStar:{name:'글램 스타',mood:'✨ 스타형',desc:'조명 아래 반짝임과 입장감이 가장 중요한 화려한 타입입니다.',shops:['더화이트엘리자베스','황정아웨딩','비비드블랑'],tags:['star','glam','beads','silver','glitter','top','deepv','darkhall','hotel'],img:'img/GlamStar.png'},
   HotelStar:{name:'호텔 스타',mood:'✨ 스타형',desc:'호텔 조명 아래 가장 빛나는 화려함과 존재감을 원하는 타입입니다.',shops:['황정아웨딩','레이앤코','엔조최재훈'],tags:['star','glam','silver','glitter','mermaid','aline','drape','deepv','hotel','darkhall'],img:'img/HotelStar.png'},
   RedCarpetStar:{name:'레드카펫 스타',mood:'✨ 스타형',desc:'드레스 자체가 주인공처럼 보이는 여배우 무드를 선호하는 타입입니다.',shops:['레이앤코','황정아웨딩','엔조최재훈'],tags:['star','glam','mermaid','silver','glitter','deepv','drape','darkhall','hotel'],img:'img/RedCarpetStar.png'},
   SignatureGlam:{name:'시그니처 글램',mood:'✨ 스타형',desc:'강한 실루엣과 화려한 디테일을 동시에 원하는 시그니처 타입입니다.',shops:['엔조최재훈','레이앤코','더화이트엘리자베스'],tags:['star','fashion','glam','mermaid','hline','glitter','silver','deepv','top','darkhall'],img:'img/SignatureGlam.png'},
-  FirstLove:{name:'첫사랑 브라이드',mood:'🌸 첫사랑형',desc:'청순하고 사랑스러운 분위기가 가장 먼저 느껴지는 타입입니다.',shops:['로즈로사','아벨바이케이','하우스오브에이미'],tags:['romance','pure','aline','flower','organza','square','offshoulder','brighthall','chapel'],img:'img/FirstLove.png'},
-  NaturalRomance:{name:'내추럴 로맨스',mood:'🌸 첫사랑형',desc:'자연스럽고 부드러운 분위기 안에서 은근한 로맨틱함을 원하는 타입입니다.',shops:['시작바이이명순','로즈로사','비비드블랑'],tags:['romance','pure','aline','hline','organza','flower','square','top','chapel','brighthall'],img:'img/NaturalRomance.png'},
+  FirstLove:{name:'첫사랑 브라이드',mood:'🌸 첫사랑형',desc:'청순하고 사랑스러운 분위기가 가장 먼저 느껴지는 타입입니다.',shops:['시작바이이명순','하우스오브에이미','셀린아뜰리에'],tags:['romance','pure','aline','flower','organza','square','offshoulder','brighthall','chapel'],img:'img/FirstLove.png'},
+  NaturalRomance:{name:'내추럴 로맨스',mood:'🌸 첫사랑형',desc:'자연스럽고 부드러운 분위기 안에서 은근한 로맨틱함을 원하는 타입입니다.',shops:['하우스오브에이미','로즈로사','비비드블랑'],tags:['romance','pure','aline','hline','organza','flower','square','top','chapel','brighthall'],img:'img/NaturalRomance.png'},
   NewYorkBride:{name:'뉴욕 브라이드',mood:'🖤 패션형',desc:'웨딩보다 스타일이 먼저 보이는 시크하고 감각적인 타입입니다.',shops:['메종레브','로브드K','에토프꾸띄르'],tags:['fashion','hline','mermaid','silk','square','deepv','hotel','brighthall'],img:'img/NewYorkBride.png'},
   RunwayBride:{name:'런웨이 브라이드',mood:'🖤 패션형',desc:'슬림한 실루엣과 하이패션 감도가 강한 타입입니다.',shops:['케일라베넷','엔조최재훈','메종레브'],tags:['fashion','mermaid','hline','silk','glitter','deepv','drape','hotel','darkhall'],img:'img/RunwayBride.png'}
 };
@@ -387,7 +388,7 @@ function saveImage(e){
 }
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script><!-- CLAUDE -->
-<div class="version">v0.02.3 · 👀 <span id="visitCount"></span></div><!-- CLAUDE -->
+<div class="version">v0.02.4 · 👀 <span id="visitCount"></span></div><!-- CLAUDE -->
 <script>// CLAUDE: 페이지 로드 시 CountAPI로 방문자 수 카운트 및 표시
 fetch('https://api.counterapi.dev/v1/uwicom/wedding-mood-test/up')
   .then(r=>r.json())

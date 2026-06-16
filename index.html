@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="ko">
 <head>
   <meta charset="utf-8" />
@@ -31,12 +31,21 @@
     .result-card{background:#fff;box-shadow:none;border-color:#f0d9e2}
     .axis-card{border:0;border-top:1px solid #eee4e8;border-radius:0;padding:22px 4px;background:#fff}
     .axis-title{font-size:18px;margin-bottom:14px;color:#3e3740}
-    .axis-track{height:12px;background:#f0f0f0}
+    /* CODEX: 각 축은 우세한 쪽만 진하게 채우고 반대쪽은 연한 배경으로 남깁니다. */
+    .axis-track{height:12px;background:#eaf4f8}
     .axis-fill-left{background:#70a9bd;border-radius:999px 0 0 999px}
     .axis-fill-right{background:#70a9bd;border-radius:0 999px 999px 0}
-    .axis-card:nth-child(2) .axis-fill-left,.axis-card:nth-child(2) .axis-fill-right{background:#d7a737}
-    .axis-card:nth-child(3) .axis-fill-left,.axis-card:nth-child(3) .axis-fill-right{background:#62a77b}
-    .axis-card:nth-child(4) .axis-fill-left,.axis-card:nth-child(4) .axis-fill-right{background:#8e6aaa}
+    .axis-card:nth-child(2) .axis-track{background:#fdf6e3}
+    .axis-card:nth-child(2) .axis-fill-left{background:#d7a737}
+    .axis-card:nth-child(2) .axis-fill-right{background:#d7a737}
+    .axis-card:nth-child(3) .axis-track{background:#eaf6ee}
+    .axis-card:nth-child(3) .axis-fill-left{background:#62a77b}
+    .axis-card:nth-child(3) .axis-fill-right{background:#62a77b}
+    .axis-card:nth-child(4) .axis-track{background:#f2ecf9}
+    .axis-card:nth-child(4) .axis-fill-left{background:#8e6aaa}
+    .axis-card:nth-child(4) .axis-fill-right{background:#8e6aaa}
+    .shop-fit{font-size:20px;font-weight:950;color:#b05f83;white-space:nowrap}
+    .result-meta{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 6px}
     @media(max-width:620px){.wrap{padding:24px 16px 50px}.qtitle{font-size:28px}.choice{min-height:88px;padding:18px}.choice-title{font-size:16px}.choice-desc{font-size:13px}}
     .version{position:fixed;bottom:10px;right:14px;font-size:11px;color:#c9b0bb;font-weight:600;letter-spacing:.04em;pointer-events:none}
 
@@ -59,34 +68,34 @@
 <script>
 const shops={
  '누벨드블랑':{home:'',insta:'https://www.instagram.com/nouvelle_de_blanc_official/'},
- '켈리손윤희':{home:'https://sonyunhui.com/',insta:'https://www.instagram.com/sonyunhui/'},
- '시작바이이명순':{home:'',insta:'https://www.instagram.com/czacc_official/'},
+ '켈리손윤희':{home:'http://sonyunhui.com/',insta:'https://www.instagram.com/sonyunhui/'},
+ '시작바이이명순':{home:'http://www.czacc.co.kr/',insta:'https://www.instagram.com/czacc_official/'},
  '김선진끌로에':{home:'',insta:'https://www.instagram.com/cloe_kr/'},
- '마리레나바이블랑':{home:'',insta:'https://www.instagram.com/marilenabyblanc_official/'},
- '브라이드손윤희':{home:'https://sonyunhui.com/',insta:'https://www.instagram.com/bridesonyunhui/'},
- '로브드K':{home:'',insta:'https://www.instagram.com/robedek.official/'},
+ '마리레나바이블랑':{home:'https://www.marilenabyblanc.co.kr/',insta:'https://www.instagram.com/marilenabyblanc_official/'},
+ '브라이드손윤희':{home:'http://sonyunhui.com/',insta:'https://www.instagram.com/bridesonyunhui/'},
+ '로브드K':{home:'https://www.robedek.com/',insta:'https://www.instagram.com/robedek.official/'},
  '메종레브':{home:'https://revesbridal.co.kr/',insta:'https://www.instagram.com/maisonreve_official/'},
  '로즈로사':{home:'http://www.roserosa.co.kr/',insta:'https://www.instagram.com/roserosa.wedding/'},
- '비비드블랑':{home:'https://bbdeblanc.com/',insta:'https://www.instagram.com/bbdeblanc/'},
- '아벨바이케이':{home:'https://abelbyk.co.kr/',insta:'https://www.instagram.com/abelbyk_official/'},
- '황정아웨딩':{home:'',insta:'https://www.instagram.com/hwangjeongah_official/'},
+ '비비드블랑':{home:'http://bbdeblanc.com/',insta:'https://www.instagram.com/bbdeblanc/'},
+ '아벨바이케이':{home:'http://abelbyk.co.kr/',insta:'https://www.instagram.com/abelbyk_official/'},
+ '황정아웨딩':{home:'https://hwangjeongah.s-wed.co.kr/',insta:'https://www.instagram.com/hwangjeongah_official/'},
  '하우스오브에이미':{home:'https://houseofamy.com/',insta:'https://www.instagram.com/houseofamy_official/'},
  '레이앤코':{home:'',insta:'https://www.instagram.com/raynco_official/'},
- '케일라베넷':{home:'',insta:'https://www.instagram.com/kaylabennet_official/'},
- '엔조최재훈':{home:'https://www.choijaehoon.co.kr/',insta:'https://www.instagram.com/choijaehoon.official/'},
- '세인트모니카':{home:'https://monicablanche.com/',insta:'https://www.instagram.com/st.monica_official/'},
+ '케일라베넷':{home:'https://kaylabennet.com/',insta:'https://www.instagram.com/kaylabennet_official/'},
+ '엔조최재훈':{home:'http://choijaehoon.kr/',insta:'https://www.instagram.com/choijaehoon.official/'},
+ '모니카블랑쉬':{home:'https://monicablanche.com/',insta:'https://www.instagram.com/st.monica_official/'},
  '르블랑':{home:'https://leblancdress.com/',insta:'https://www.instagram.com/le_blanc_wedding_official/'},
- '클라우디아':{home:'https://www.claudiacompany.com/',insta:'https://www.instagram.com/claudiawedding_official/'},
+ '클라우디아':{home:'http://www.claudiacompany.com/',insta:'https://www.instagram.com/claudiawedding_official/'},
  '더화이트엘리자베스':{home:'',insta:'https://www.instagram.com/thewhite.elisabeth/'},
  '에토프꾸띄르':{home:'',insta:'https://www.instagram.com/etoffecouture_official/'}
-};
+}; // 수정
 const types={
  CRPF:{name:'로열 프린세스',mood:'👸 공주형',main:'누벨드블랑',subs:['켈리손윤희','로즈로사'],hall:'밝은홀 · 채플',tags:['오간자','풍성함','동화 같은 로망'],desc:'풍성한 스커트와 부드러운 로맨틱 무드가 잘 어울리는 공주형 취향입니다.'},
  CRPB:{name:'클래식 스파클',mood:'👸 공주형',main:'켈리손윤희',subs:['비비드블랑','누벨드블랑'],hall:'호텔홀 · 어두운홀',tags:['클래식 공주','맑은 비즈','우아함'],desc:'공주 무드에 클래식한 우아함과 은은한 반짝임을 함께 원하는 취향입니다.'},
  CRSF:{name:'퓨어 프린세스',mood:'👸 공주형',main:'시작바이이명순',subs:['로즈로사','아벨바이케이'],hall:'채플 · 야외 · 밝은홀',tags:['청순','자연스러움','소프트 라인'],desc:'과한 장식보다 맑고 청순한 분위기를 선호하는 순수한 공주형입니다.'},
- CRSB:{name:'타임리스 엘레강스',mood:'👑 여왕형',main:'김선진끌로에',subs:['세인트모니카','르블랑'],hall:'밝은홀 · 호텔홀',tags:['미카도 실크','정통 클래식','품격'],desc:'시간이 지나도 촌스럽지 않은 고급스러운 클래식 웨딩에 가까운 취향입니다.'},
+ CRSB:{name:'타임리스 엘레강스',mood:'👑 여왕형',main:'김선진끌로에',subs:['모니카블랑쉬','르블랑'],hall:'밝은홀 · 호텔홀',tags:['미카도 실크','정통 클래식','품격'],desc:'시간이 지나도 촌스럽지 않은 고급스러운 클래식 웨딩에 가까운 취향입니다.'},
  CMPF:{name:'소프트 로맨틱',mood:'🌸 첫사랑형',main:'마리레나바이블랑',subs:['하우스오브에이미','로브드K'],hall:'밝은홀',tags:['여성스러움','소프트 시크','절제된 로맨틱'],desc:'사랑스럽지만 너무 공주스럽지는 않은, 세련된 로맨틱 무드를 선호합니다.'},
- CMPB:{name:'럭셔리 퀸',mood:'👑 여왕형',main:'브라이드손윤희',subs:['세인트모니카','클라우디아'],hall:'호텔홀 · 어두운홀',tags:['럭셔리 실크','품격','존재감'],desc:'실크의 고급감과 여왕 같은 품격을 가장 중요하게 보는 취향입니다.'},
+ CMPB:{name:'럭셔리 퀸',mood:'👑 여왕형',main:'브라이드손윤희',subs:['모니카블랑쉬','클라우디아'],hall:'호텔홀 · 어두운홀',tags:['럭셔리 실크','품격','존재감'],desc:'실크의 고급감과 여왕 같은 품격을 가장 중요하게 보는 취향입니다.'},
  CMSF:{name:'모던 클래식',mood:'🖤 패션형',main:'로브드K',subs:['메종레브','에토프꾸띄르'],hall:'호텔홀 · 밝은홀',tags:['미니멀','모던','정제된 라인'],desc:'군더더기 없이 세련되고, 핏과 구조미가 살아있는 드레스를 선호합니다.'},
  CMSB:{name:'뉴욕 브라이드',mood:'🖤 패션형',main:'메종레브',subs:['로브드K','에토프꾸띄르'],hall:'호텔홀',tags:['뉴욕 감성','시크','패션 웨딩'],desc:'웨딩보다 스타일이 먼저 보이는 시크하고 감각적인 패션형 취향입니다.'},
  GRPF:{name:'로맨틱 퀸',mood:'🌸 첫사랑형',main:'로즈로사',subs:['아벨바이케이','하우스오브에이미'],hall:'밝은홀 · 야외',tags:['플라워','로맨틱','화사함'],desc:'플라워 디테일과 부드러운 분위기가 강한 로맨틱 취향입니다.'},
@@ -97,21 +106,22 @@ const types={
  GMPB:{name:'레드카펫 스타',mood:'✨ 스타형',main:'레이앤코',subs:['황정아웨딩','비비드블랑'],hall:'어두운홀 · 호텔홀',tags:['레드카펫','여배우 무드','화려한 비즈'],desc:'드레스 자체가 주인공처럼 보이는 레드카펫 무드를 선호합니다.'},
  GMSF:{name:'런웨이 브라이드',mood:'🖤 패션형',main:'케일라베넷',subs:['메종레브','엔조최재훈'],hall:'호텔홀 · 어두운홀',tags:['런웨이','머메이드','하이패션'],desc:'슬림한 실루엣과 감각적인 스타일링이 강한 패션형 취향입니다.'},
  GMSB:{name:'시그니처 스타',mood:'✨ 스타형',main:'엔조최재훈',subs:['클라우디아','황정아웨딩'],hall:'호텔홀 · 어두운홀',tags:['구조적','하이패션 글램','시그니처'],desc:'강한 실루엣과 화려함을 동시에 원하는 시그니처 글램 취향입니다.'}
-};
+}; // 수정
 const moodKeys=['👑 여왕형','👸 공주형','✨ 스타형','🌸 첫사랑형','🖤 패션형'];
+// CODEX: CMPF도 로맨틱/플라워 취향 선택지에서 점수를 받아 결과로 도달할 수 있게 보정합니다.
 const questions=[
- {t:'드레스 투어 첫날, 거울 앞에 선 순간 “이 모습이면 바로 계약할 것 같다!” 싶은 장면은?',multi:false,c:[['왕실 연회장에 들어서는 왕비 같은 모습 — 고급스럽고 압도적인 분위기. 많은 장식보다 품격이 먼저 느껴진다.',{CRSB:2,CMPB:2}],['디즈니 영화 속 주인공 같은 모습 — 풍성한 드레스가 펼쳐지고 오늘만큼은 진짜 공주가 된 느낌.',{CRPF:2,CRPB:2}],['레드카펫을 걷는 스타 같은 모습 — 조명을 받을 때마다 반짝이고 모두의 시선이 집중되는 느낌.',{GRPB:2,GRSB:2,GMPB:1}],['로맨스 영화 여주인공 같은 모습 — 사랑스럽고 부드럽고 사진만 봐도 행복해 보이는 느낌.',{GRPF:2,GRSF:2,CRSF:1}],['패션잡지 커버를 찍는 모델 같은 모습 — 군더더기 없이 세련되고 요즘 감성의 멋있는 신부.',{CMSF:2,CMSB:2,GMSF:1}]]},
- {t:'드레스 투어를 단 1곳만 갈 수 있다면?',multi:false,c:[['고급스러운 실크 드레스가 유명한 곳 — 원단의 힘만으로 우아하고 부티나는 분위기',{CRSB:2,CMPB:3,CMSF:1}],['풍성한 공주 드레스가 유명한 곳 — 스커트가 드라마틱하게 펼쳐지는 로망',{CRPF:3,CRPB:2}],['비즈와 반짝임이 유명한 곳 — 조명 아래 입장감이 확 살아나는 스타일',{GRPB:3,GRSB:2,GMPB:1}],['플라워와 로맨틱 무드가 유명한 곳 — 청순하고 사랑스러운 사진이 남는 스타일',{GRPF:3,GRSF:2,GMPF:1}],['세련된 핏과 패션감이 유명한 곳 — 깔끔하고 힙한 웨딩 화보 같은 스타일',{CMSB:3,GMSF:2,CMSF:1}]]},
+ {t:'드레스 투어 첫날, 거울 앞에 선 순간 “이 모습이면 바로 계약할 것 같다” 싶은 장면은?',multi:false,c:[['왕실의 여왕 같은 모습 — 고급스럽고 품격 있는 존재감',{CRSB:2,CMPB:2}],['동화 속 공주 같은 모습 — 풍성하고 로망 가득한 분위기',{CRPF:2,CRPB:2}],['레드카펫 스타 같은 모습 — 화려하고 시선을 사로잡는 분위기',{GRPB:2,GRSB:2,GMPB:1}],['첫사랑 같은 모습 — 청순하고 사랑스러운 분위기',{GRPF:2,GRSF:2,CMPF:2,CRSF:1}],['패션쇼 모델 같은 모습 — 세련되고 감각적인 분위기',{CMSF:2,CMSB:2,GMSF:1}]]},
+ {t:'드레스 투어를 단 1곳만 갈 수 있다면?',multi:false,c:[['고급스러운 실크 드레스가 유명한 곳',{CRSB:2,CMPB:3,CMSF:1}],['풍성한 공주 드레스가 유명한 곳',{CRPF:3,CRPB:2}],['비즈와 반짝임이 유명한 곳',{GRPB:3,GRSB:2,GMPB:1}],['플라워와 로맨틱 무드가 유명한 곳',{GRPF:3,GRSF:2,CMPF:2,GMPF:1}],['세련된 핏과 패션감이 유명한 곳',{CMSB:3,GMSF:2,CMSF:1}]]},
  {t:'가장 끌리는 소재/디테일은?',hint:'최대 2개까지 선택 가능',multi:true,max:2,c:[['미카도 실크',{CRSB:4,CMPB:4,CMSF:2}],['오간자',{CRPF:4,CRPB:2,GRPF:2}],['맑은 비즈',{GRPB:4,CRPB:3}],['플라워 아플리케',{GRPF:4,GRSF:3,GMPF:2}],['실버 비즈',{GRSB:4,GMPB:3,GRPB:1}],['글리터·스팽글',{GMPB:4,GMSB:2,GRSB:2}]]},
- {t:'드레스 볼륨은?',multi:false,c:[['A라인',{CRSB:2,CMSF:1,GRSF:1}],['풍성 A라인',{CRPF:2,CRPB:2,GRPF:1}],['벨라인',{CRPF:3,CRPB:2,GRPB:1}],['머메이드',{GMSF:3,CMSB:2,GMPB:1}],['엠파이어 라인',{CRSF:2,GRSF:2,GMPF:1}]]},
- {t:'드레스를 볼 때 가장 먼저 보는 부분은?',multi:false,c:[['원단의 고급스러움',{CMPB:3,CRSB:2}],['스커트 볼륨',{CRPF:3,CRPB:2}],['반짝임과 비즈',{GRPB:3,GRSB:2}],['레이스·플라워 디테일',{GRPF:3,GRSF:2}],['전체적인 라인과 핏',{CMSB:3,GMSF:2,CMSF:1}]]},
+ {t:'드레스 볼륨은?',multi:false,c:[['A라인',{CRSB:2,CMSF:1,GRSF:1}],['풍성 A라인',{CRPF:2,CRPB:2,GRPF:1}],['벨라인',{CRPF:3,CRPB:2,GRPB:1}],['머메이드',{GMSF:3,CMSB:2,GMPB:1}],['엠파이어 라인',{CRSF:2,GRSF:2,CMPF:2,GMPF:1}]]},
+ {t:'드레스를 볼 때 가장 먼저 보는 부분은?',multi:false,c:[['원단의 고급스러움',{CMPB:3,CRSB:2}],['스커트 볼륨',{CRPF:3,CRPB:2}],['반짝임과 비즈',{GRPB:3,GRSB:2}],['레이스·플라워 디테일',{GRPF:3,GRSF:2,CMPF:2}],['전체적인 라인과 핏',{CMSB:3,GMSF:2,CMSF:1}]]},
  {t:'가장 끌리는 상체 디자인은?',multi:false,c:[['스퀘어넥',{CRSB:2,CMSF:1,CMPB:1}],['탑드레스',{CRPF:2,GRPB:2,CRPB:1}],['오프숄더',{GRPF:2,GRSF:2,CRPF:1}],['드레이프넥',{CMPB:2,CRSB:1,GMPF:1}],['딥브이넥',{GMSF:2,GMPB:2,CMSB:1}]]},
- {t:'드레스에서 가장 중요한 것은?',multi:false,c:[['품격',{CMPB:3,CRSB:2}],['로망',{CRPF:3,CRPB:2}],['화려함',{GRSB:3,GRPB:2,GMPB:1}],['사랑스러움',{GRPF:2,GRSF:2,CRSF:1}],['세련미',{CMSB:3,CMSF:2,GMSF:1}]]},
+ {t:'드레스에서 가장 중요한 것은?',multi:false,c:[['품격',{CMPB:3,CRSB:2}],['로망',{CRPF:3,CRPB:2}],['화려함',{GRSB:3,GRPB:2,GMPB:1}],['사랑스러움',{GRPF:2,GRSF:2,CMPF:2,CRSF:1}],['세련미',{CMSB:3,CMSF:2,GMSF:1}]]},
  {t:'본식 홀 분위기는 어떤가요?',multi:false,c:[['클래식 호텔 예식장',{CMPB:2,GRSB:3,GMSB:2,CRSB:1}],['어두운 홀',{GRPB:3,GRSB:3,GMPB:2,GMSB:1}],['밝은 홀',{CRSB:2,CRSF:2,GRPF:2,CMSF:1}],['야외 예식 또는 채플 예식',{GRPF:3,CRSF:2,GRSF:2,GMPF:1}],['아직 정하지 못했다',{}]]},
- {t:'예산 제한 없이 딱 하나만 업그레이드할 수 있다면?',multi:false,c:[['최고급 미카도 실크',{CMPB:3,CRSB:3}],['더욱 풍성한 스커트',{CRPF:3,CRPB:2}],['수작업 비즈 추가',{GRPB:3,GRSB:2,GMPB:1}],['플라워 아플리케 추가',{GRPF:3,GRSF:2,GMPF:1}],['완벽한 맞춤 핏',{CMSB:3,GMSF:2,CMSF:1}]]},
- {t:'드레스 투어 후 가장 후회할 것 같은 상황은?',multi:false,c:[['미카도 실크 드레스를 안 입어본 것',{CRSB:3,CMPB:3}],['풍성한 드레스를 안 입어본 것',{CRPF:3,CRPB:2}],['반짝이는 드레스를 안 입어본 것',{GRPB:3,GRSB:2,GMPB:1}],['플라워 드레스를 안 입어본 것',{GRPF:3,GRSF:2}],['머메이드 드레스를 안 입어본 것',{GMSF:4,CMSB:2}]]},
- {t:'드레스 투어 마지막 날, 최종 선택 직전이라면 무엇 때문에 가장 고민될 것 같나요?',multi:false,c:[['실크의 고급스러움',{CMPB:4,CRSB:3}],['풍성한 공주 무드',{CRPF:4,CRPB:3}],['반짝이는 비즈',{GRPB:4,GRSB:3,GMPB:1}],['플라워 디테일',{GRPF:4,GRSF:3,GMPF:1}],['세련된 핏',{CMSB:4,GMSF:3,CMSF:1}]]}
-];
+ {t:'예산 제한 없이 딱 하나만 업그레이드할 수 있다면?',multi:false,c:[['최고급 미카도 실크',{CMPB:3,CRSB:3}],['더욱 풍성한 스커트',{CRPF:3,CRPB:2}],['수작업 비즈 추가',{GRPB:3,GRSB:2,GMPB:1}],['플라워 아플리케 추가',{GRPF:3,GRSF:2,CMPF:2,GMPF:1}],['완벽한 맞춤 핏',{CMSB:3,GMSF:2,CMSF:1}]]},
+ {t:'드레스 투어 후 가장 후회할 것 같은 상황은?',multi:false,c:[['미카도 실크 드레스를 안 입어본 것',{CRSB:3,CMPB:3}],['풍성한 드레스를 안 입어본 것',{CRPF:3,CRPB:2}],['반짝이는 드레스를 안 입어본 것',{GRPB:3,GRSB:2,GMPB:1}],['플라워 드레스를 안 입어본 것',{GRPF:3,GRSF:2,CMPF:2}],['머메이드 드레스를 안 입어본 것',{GMSF:4,CMSB:2}]]},
+ {t:'드레스 투어 마지막 날, 최종 선택 직전이라면 무엇 때문에 가장 고민될 것 같나요?',multi:false,c:[['실크의 고급스러움',{CMPB:4,CRSB:3}],['풍성한 공주 무드',{CRPF:4,CRPB:3}],['반짝이는 비즈',{GRPB:4,GRSB:3,GMPB:1}],['플라워 디테일',{GRPF:4,GRSF:3,CMPF:2,GMPF:1}],['세련된 핏',{CMSB:4,GMSF:3,CMSF:1}]]}
+]; // 수정
 let current=0, answers=Array(questions.length).fill(null);
 function startTest(){document.getElementById('intro').style.display='none';document.getElementById('test').style.display='block';renderQ()}
 function formatChoice(text){
@@ -144,11 +154,21 @@ function axisScores(score){
  });
 }
 function axisBar(ax){
- return `<div class="axis-card"><div class="axis-title">${ax.title}</div><div class="axis-head"><div><div class="axis-pct">${ax.lp}%</div><div class="axis-name">${ax.leftName}</div></div><div style="text-align:right"><div class="axis-pct">${ax.rp}%</div><div class="axis-name">${ax.rightName}</div></div></div><div class="axis-track"><div class="axis-fill-left" style="width:${ax.lp}%"></div><div class="axis-fill-right" style="width:${ax.rp}%"></div></div><div class="axis-foot"><span class="axis-code">${ax.left}</span><span class="axis-code">${ax.right}</span></div></div>`;
+ // CLAUDE 오류: 이전에 axis-fill-left만 항상 사용 → rp > lp일 때 오른쪽이 우세한데 왼쪽 lp% 로 채워 게이지 방향이 반대로 표현됨
+ // CODEX 수정: 우세한 쪽에 따라 left/right fill 방향을 분기
+ const fill=ax.lp>=ax.rp
+  ? `<div class="axis-fill-left" style="width:${ax.lp}%"></div>`
+  : `<div class="axis-fill-right" style="width:${ax.rp}%"></div>`;
+ return `<div class="axis-card"><div class="axis-title">${ax.title}</div><div class="axis-head"><div><div class="axis-pct">${ax.lp}%</div><div class="axis-name">${ax.leftName}</div></div><div style="text-align:right"><div class="axis-pct">${ax.rp}%</div><div class="axis-name">${ax.rightName}</div></div></div><div class="axis-track">${fill}</div><div class="axis-foot"><span class="axis-code">${ax.left}</span><span class="axis-code">${ax.right}</span></div></div>`;
 }
-function shopCard(name,rank){const s=shops[name]||{};let links='';if(s.home)links+=`<a class="linkbtn" target="_blank" href="${s.home}">공식 홈페이지</a>`;if(s.insta)links+=`<a class="linkbtn insta" target="_blank" href="${s.insta}">공식 인스타그램</a>`;return `<div class="shop"><div class="shop-top"><div><div class="rank">${rank}</div><div class="shop-name">${name}</div></div></div><div class="links">${links||'<span class="small">공식 채널 확인 중</span>'}</div></div>`}
-function renderResult(code,score){document.getElementById('test').style.display='none';const t=types[code];let bars=axisScores(score).map(axisBar).join('');let shopHtml=shopCard(t.main,'대표 드레스샵')+t.subs.map((s,i)=>shopCard(s,`보조 추천 ${i+1}`)).join('');document.getElementById('result').className='result show';document.getElementById('result').innerHTML=`<div class="result-card"><div class="type-code">${code}</div><div class="type-name">${t.name}</div><div class="mood">${t.mood}</div><p class="desc">${t.desc}</p><div class="tags">${t.tags.map(x=>`<span class="tag">${x}</span>`).join('')}<span class="tag">추천 홀: ${t.hall}</span></div><h3>4축 성향 분석</h3><div class="bars">${bars}</div><h3>추천 드레스샵</h3><div class="shops">${shopHtml}</div><div class="footer-actions"><button class="btn" onclick="location.reload()">다시 테스트하기</button></div><p class="small">결과는 취향 기반 추천이며, 실제 피팅 결과·예식장 조명·체형·예산에 따라 달라질 수 있어요.</p></div>`;window.scrollTo({top:0,behavior:'smooth'})}
+// CODEX: 결과 페이지에 TOP3 적합도와 추천 홀/소재/실루엣을 명시합니다.
+function resultDetails(code,t){
+ const silhouettes={P:'풍성 A라인 · 벨라인',S:'슬림 A라인 · 머메이드'};
+ return {hall:t.hall,material:t.tags.slice(0,2).join(' · '),silhouette:silhouettes[code[2]]||'체형 맞춤 실루엣'};
+}
+function shopCard(name,rank,fit){const s=shops[name]||{};let links='';if(s.home)links+=`<a class="linkbtn" target="_blank" href="${s.home}">공식 홈페이지</a>`;if(s.insta)links+=`<a class="linkbtn insta" target="_blank" href="${s.insta}">공식 인스타그램</a>`;return `<div class="shop"><div class="shop-top"><div><div class="rank">${rank}</div><div class="shop-name">${name}</div></div><div class="shop-fit">${fit}%</div></div><div class="links">${links||'<span class="small">공식 채널 확인 중</span>'}</div></div>`}
+function renderResult(code,score){document.getElementById('test').style.display='none';const t=types[code];const details=resultDetails(code,t);let bars=axisScores(score).map(axisBar).join('');let shopHtml=shopCard(t.main,'TOP 1',96)+t.subs.map((s,i)=>shopCard(s,`TOP ${i+2}`,i===0?91:87)).join('');document.getElementById('result').className='result show';document.getElementById('result').innerHTML=`<div class="result-card"><div class="type-code">${code}</div><div class="type-name">${t.name}</div><div class="mood">${t.mood}</div><p class="desc">${t.desc}</p><div class="result-meta"><span class="tag">추천 홀: ${details.hall}</span><span class="tag">추천 소재: ${details.material}</span><span class="tag">추천 실루엣: ${details.silhouette}</span></div><div class="tags">${t.tags.map(x=>`<span class="tag">${x}</span>`).join('')}</div><h3>4축 성향 분석</h3><div class="bars">${bars}</div><h3>추천 드레스샵 TOP3</h3><div class="shops">${shopHtml}</div><div class="footer-actions"><button class="btn" onclick="location.reload()">다시 테스트하기</button></div><p class="small">결과는 취향 기반 추천이며, 실제 피팅 결과·예식장 조명·체형·예산에 따라 달라질 수 있어요.</p></div>`;window.scrollTo({top:0,behavior:'smooth'})}
 </script>
-<div class="version">v0.00.2</div>
+<div class="version">v0.01.3</div>
 </body>
 </html>

@@ -49,7 +49,7 @@
     .axis-name{font-size:13px;color:var(--muted);font-weight:800}
     .axis-track{position:relative;height:12px;border-radius:999px;background:#f7edf1;overflow:hidden}
     .axis-fill-left{position:absolute;left:0;top:0;height:100%;border-radius:999px 0 0 999px;background:#70a9bd}
-    .axis-fill-right{position:absolute;right:0;top:0;height:100%;border-radius:0 999px 999px 0;background:#70a9bd}
+    .axis-fill-right{position:absolute;top:0;height:100%;border-radius:0 999px 999px 0;background:#70a9bd}/* CLAUDE: right:0 제거 — iOS Safari 버그 대응, left:lp% 인라인 처리 */
     .axis-card:nth-child(2) .axis-fill-left,.axis-card:nth-child(2) .axis-fill-right{background:#d7a737}
     .axis-card:nth-child(3) .axis-fill-left,.axis-card:nth-child(3) .axis-fill-right{background:#62a77b}
     .axis-card:nth-child(4) .axis-fill-left,.axis-card:nth-child(4) .axis-fill-right{background:#8e6aaa}
@@ -324,7 +324,7 @@ function axisScores(scores){
 function axisBar(ax){
   const fill=ax.lp>=ax.rp
     ? `<div class="axis-fill-left" style="width:${ax.lp}%"></div>`
-    : `<div class="axis-fill-right" style="width:${ax.rp}%"></div>`;
+    : `<div class="axis-fill-right" style="left:${ax.lp}%;width:${ax.rp}%"></div>`; // CLAUDE: right:0 → left:lp% 로 변경
   return `<div class="axis-card"><div class="axis-title">${ax.title}</div><div class="axis-head"><div><div class="axis-pct">${ax.lp}%</div><div class="axis-name">${ax.leftName}</div></div><div style="text-align:right"><div class="axis-pct">${ax.rp}%</div><div class="axis-name">${ax.rightName}</div></div></div><div class="axis-track">${fill}</div><div class="axis-foot"><span class="axis-code">${ax.left}</span><span class="axis-code">${ax.right}</span></div></div>`;
 }
 

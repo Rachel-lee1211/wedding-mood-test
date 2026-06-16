@@ -110,12 +110,12 @@ const types={
 const moodKeys=['👑 여왕형','👸 공주형','✨ 스타형','🌸 첫사랑형','🖤 패션형'];
 // CODEX: CMPF도 로맨틱/플라워 취향 선택지에서 점수를 받아 결과로 도달할 수 있게 보정합니다.
 const questions=[
- {t:'드레스 투어 첫날, 거울 앞에 선 순간 “이 모습이면 바로 계약할 것 같다” 싶은 장면은?',multi:false,c:[['왕실의 여왕 같은 모습 — 고급스럽고 품격 있는 존재감',{CRSB:2,CMPB:2}],['동화 속 공주 같은 모습 — 풍성하고 로망 가득한 분위기',{CRPF:2,CRPB:2}],['레드카펫 스타 같은 모습 — 화려하고 시선을 사로잡는 분위기',{GRPB:2,GRSB:2,GMPB:1}],['첫사랑 같은 모습 — 청순하고 사랑스러운 분위기',{GRPF:2,GRSF:2,CMPF:2,CRSF:1}],['패션쇼 모델 같은 모습 — 세련되고 감각적인 분위기',{CMSF:2,CMSB:2,GMSF:1}]]},
+ {t:'당신이 꿈꾸는 신부의 모습은?',multi:false,c:[['왕실의 여왕 같은 모습 — 고급스럽고 품격 있는 존재감',{CRSB:2,CMPB:2}],['동화 속 공주 같은 모습 — 풍성하고 로망 가득한 분위기',{CRPF:2,CRPB:2}],['레드카펫 스타 같은 모습 — 화려하고 시선을 사로잡는 분위기',{GRPB:2,GRSB:2,GMPB:1}],['첫사랑 같은 모습 — 청순하고 사랑스러운 분위기',{GRPF:2,GRSF:2,CMPF:2,CRSF:1}],['패션쇼 모델 같은 모습 — 세련되고 감각적인 분위기',{CMSF:2,CMSB:2,GMSF:1}]]},
  {t:'드레스 투어를 단 1곳만 갈 수 있다면?',multi:false,c:[['고급스러운 실크 드레스가 유명한 곳',{CRSB:2,CMPB:3,CMSF:1}],['풍성한 공주 드레스가 유명한 곳',{CRPF:3,CRPB:2}],['비즈와 반짝임이 유명한 곳',{GRPB:3,GRSB:2,GMPB:1}],['플라워와 로맨틱 무드가 유명한 곳',{GRPF:3,GRSF:2,CMPF:2,GMPF:1}],['세련된 핏과 패션감이 유명한 곳',{CMSB:3,GMSF:2,CMSF:1}]]},
  {t:'가장 끌리는 소재/디테일은?',hint:'최대 2개까지 선택 가능',multi:true,max:2,c:[['미카도 실크',{CRSB:4,CMPB:4,CMSF:2}],['오간자',{CRPF:4,CRPB:2,GRPF:2}],['맑은 비즈',{GRPB:4,CRPB:3}],['플라워 아플리케',{GRPF:4,GRSF:3,GMPF:2}],['실버 비즈',{GRSB:4,GMPB:3,GRPB:1}],['글리터·스팽글',{GMPB:4,GMSB:2,GRSB:2}]]},
- {t:'드레스 볼륨은?',multi:false,c:[['A라인',{CRSB:2,CMSF:1,GRSF:1}],['풍성 A라인',{CRPF:2,CRPB:2,GRPF:1}],['벨라인',{CRPF:3,CRPB:2,GRPB:1}],['머메이드',{GMSF:3,CMSB:2,GMPB:1}],['엠파이어 라인',{CRSF:2,GRSF:2,CMPF:2,GMPF:1}]]},
+ {t:'가장 선호하는 드레스 볼륨은?',multi:false,c:[['A라인',{CRSB:2,CMSF:1,GRSF:1}],['풍성 A라인',{CRPF:2,CRPB:2,GRPF:1}],['벨라인',{CRPF:3,CRPB:2,GRPB:1}],['머메이드',{GMSF:3,CMSB:2,GMPB:1}],['엠파이어 라인',{CRSF:2,GRSF:2,CMPF:2,GMPF:1}]]},
  {t:'드레스를 볼 때 가장 먼저 보는 부분은?',multi:false,c:[['원단의 고급스러움',{CMPB:3,CRSB:2}],['스커트 볼륨',{CRPF:3,CRPB:2}],['반짝임과 비즈',{GRPB:3,GRSB:2}],['레이스·플라워 디테일',{GRPF:3,GRSF:2,CMPF:2}],['전체적인 라인과 핏',{CMSB:3,GMSF:2,CMSF:1}]]},
- {t:'가장 끌리는 상체 디자인은?',multi:false,c:[['스퀘어넥',{CRSB:2,CMSF:1,CMPB:1}],['탑드레스',{CRPF:2,GRPB:2,CRPB:1}],['오프숄더',{GRPF:2,GRSF:2,CRPF:1}],['드레이프넥',{CMPB:2,CRSB:1,GMPF:1}],['딥브이넥',{GMSF:2,GMPB:2,CMSB:1}]]},
+ {t:'어떤 목선(네크라인)이 가장 예뻐 보이나요?',multi:false,c:[['스퀘어넥 — 단정하고 클래식한 느낌',{CRSB:2,CMSF:1,CMPB:1}],['탑드레스 — 깔끔하고 시원한 느낌',{CRPF:2,GRPB:2,CRPB:1}],['오프숄더 — 어깨가 드러나는 로맨틱한 느낌',{GRPF:2,GRSF:2,CRPF:1}],['드레이프넥 — 우아하게 흐르는 느낌',{CMPB:2,CRSB:1,GMPF:1}],['딥브이넥 — 세련되고 시크한 느낌',{GMSF:2,GMPB:2,CMSB:1}]]/* CLAUDE */},
  {t:'드레스에서 가장 중요한 것은?',multi:false,c:[['품격',{CMPB:3,CRSB:2}],['로망',{CRPF:3,CRPB:2}],['화려함',{GRSB:3,GRPB:2,GMPB:1}],['사랑스러움',{GRPF:2,GRSF:2,CMPF:2,CRSF:1}],['세련미',{CMSB:3,CMSF:2,GMSF:1}]]},
  {t:'본식 홀 분위기는 어떤가요?',multi:false,c:[['클래식 호텔 예식장',{CMPB:2,GRSB:3,GMSB:2,CRSB:1}],['어두운 홀',{GRPB:3,GRSB:3,GMPB:2,GMSB:1}],['밝은 홀',{CRSB:2,CRSF:2,GRPF:2,CMSF:1}],['야외 예식 또는 채플 예식',{GRPF:3,CRSF:2,GRSF:2,GMPF:1}],['아직 정하지 못했다',{}]]},
  {t:'예산 제한 없이 딱 하나만 업그레이드할 수 있다면?',multi:false,c:[['최고급 미카도 실크',{CMPB:3,CRSB:3}],['더욱 풍성한 스커트',{CRPF:3,CRPB:2}],['수작업 비즈 추가',{GRPB:3,GRSB:2,GMPB:1}],['플라워 아플리케 추가',{GRPF:3,GRSF:2,CMPF:2,GMPF:1}],['완벽한 맞춤 핏',{CMSB:3,GMSF:2,CMSF:1}]]},

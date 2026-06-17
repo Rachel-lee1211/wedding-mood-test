@@ -29,6 +29,12 @@
     .btn{appearance:none;border:0;border-radius:999px;padding:13px 18px;background:#e2adc0;color:#fff;font-weight:900;cursor:pointer;font-size:15px}
     .btn.secondary{background:#fff;color:#ca8da6;border:1px solid #f2dfe6}
     .btn:disabled{opacity:.45;cursor:not-allowed;background:#f7edf1;color:#ca9caf}
+    .nickname-wrap{margin-top:20px}.nickname-label{font-size:15px;font-weight:800;color:#4a3b43;margin:0 0 10px;display:block}/* CLAUDE */
+    .nickname-row{display:flex;gap:10px;flex-wrap:wrap}/* CLAUDE */
+    .nickname-input{flex:1;min-width:0;border:1.5px solid #f2dfe6;border-radius:999px;padding:13px 18px;font-size:15px;font-weight:700;color:#171317;outline:none;transition:.15s;font-family:inherit;background:#fff}/* CLAUDE */
+    .nickname-input:focus{border-color:#d88da8;background:#fffafa}/* CLAUDE */
+    .nickname-input.error{border-color:#e05c7a;animation:shake .2s}/* CLAUDE */
+    @keyframes shake{0%,100%{transform:translateX(0)}33%{transform:translateX(-6px)}66%{transform:translateX(6px)}}/* CLAUDE */
     .result{display:none}
     .result.show{display:block}
     .result-card{padding:26px;border:1px solid #f0d9e2;background:#fff;border-radius:28px}
@@ -107,7 +113,13 @@
     <div class="badge">💍 16가지 웨딩 드레스 유형 테스트</div>
     <h1>나와 가장 잘 맞는<br/>웨딩 드레스샵 찾기</h1>
     <p class="sub">드레스 무드, 실루엣, 소재, 홀 분위기를 바탕으로 16가지 유형 중 나만의 타입을 찾아요. 결과에서 추천 드레스샵 3곳과 공식 채널, 나의 드레스 DNA를 보여줍니다.</p>
-    <div class="section"><button class="btn" onclick="startTest()">테스트 시작하기</button></div>
+    <div class="section nickname-wrap"><!-- CLAUDE: 닉네임 입력 후 테스트 시작 -->
+      <label class="nickname-label" for="nicknameInput">닉네임을 입력하고 테스트를 시작하세요 ✨</label>
+      <div class="nickname-row">
+        <input class="nickname-input" id="nicknameInput" type="text" placeholder="예) 로맨틱한 예비신부" maxlength="20" onkeydown="if(event.key==='Enter')submitNickname()">
+        <button class="btn" onclick="submitNickname()">테스트 시작하기</button>
+      </div>
+    </div>
   </div>
   <div id="test" style="display:none">
     <div class="progress"><span id="prog"></span></div>
@@ -246,6 +258,16 @@ const tagLabels={
 };
 
 let current=0,answers=Array(questions.length).fill(null);
+let userNickname='';// CLAUDE
+const SHEET_URL='https://script.google.com/macros/s/AKfycbxNGh7yQuCKtR_KmGiwn1jq_a-qlDU-6O9M5EZFt7iMPL-5WIzmzg0JD1lQ4CYMk2VM/exec';// CLAUDE
+function submitNickname(){// CLAUDE: 닉네임 수집 후 구글 시트 저장, 테스트 시작
+  const el=document.getElementById('nicknameInput');
+  const val=el.value.trim();
+  if(!val){el.classList.add('error');el.focus();setTimeout(()=>el.classList.remove('error'),300);return;}
+  userNickname=val;
+  fetch(SHEET_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify({nickname:val,date:new Date().toLocaleString('ko-KR')})}).catch(()=>{});
+  startTest();
+}
 
 function startTest(){
   document.getElementById('intro').style.display='none';
@@ -364,7 +386,7 @@ function renderResult(best,scores){
   const shopHtml=best.shops.map((name,i)=>shopCard(name,`TOP ${i+1}`,shopFit(best,i))).join('');
   document.getElementById('result').className='result show';
   // CLAUDE: 결과 카드 헤더에 유형 이미지 표시 (img 필드 없으면 이미지 영역 생략)
-  document.getElementById('result').innerHTML=`<div class="result-card"><div class="result-header"><div class="result-header-text"><div class="mood">${best.mood}</div><div class="type-name">${best.name}</div><p class="desc">${best.desc}</p></div>${best.img?`<img class="result-img" src="${best.img}" alt="${best.name}">`:''}</div><div class="result-meta"><span class="tag">추천 홀: ${detail.hall}</span><span class="tag">추천 소재: ${detail.material}</span><span class="tag">추천 실루엣: ${detail.silhouette}</span></div><div class="dna-section"><div class="dna-title">나의 드레스 DNA</div><div class="tags">${topTags}</div></div><h3>4축 성향 분석</h3><div class="bars">${bars}</div><h3>추천 드레스샵 TOP3</h3><div class="shops">${shopHtml}</div><div class="footer-actions"><button class="btn" onclick="location.reload()">다시 테스트하기</button><button class="btn secondary" onclick="saveImage(event)">이미지 저장</button></div><p class="small">결과는 취향 기반 추천이며, 실제 피팅 결과·예식장 조명·체형·예산에 따라 달라질 수 있어요.</p></div>`;
+  document.getElementById('result').innerHTML=`<div class="result-card"><div class="result-header"><div class="result-header-text">${userNickname?`<div class="mood" style="color:#b05f83;font-size:15px;margin-bottom:4px">${userNickname}님의 드레스 유형</div>`:''}<div class="mood">${best.mood}</div><div class="type-name">${best.name}</div><p class="desc">${best.desc}</p></div>${best.img?`<img class="result-img" src="${best.img}" alt="${best.name}">`:''}</div><div class="result-meta"><span class="tag">추천 홀: ${detail.hall}</span><span class="tag">추천 소재: ${detail.material}</span><span class="tag">추천 실루엣: ${detail.silhouette}</span></div><div class="dna-section"><div class="dna-title">나의 드레스 DNA</div><div class="tags">${topTags}</div></div><h3>4축 성향 분석</h3><div class="bars">${bars}</div><h3>추천 드레스샵 TOP3</h3><div class="shops">${shopHtml}</div><div class="footer-actions"><button class="btn" onclick="location.reload()">다시 테스트하기</button><button class="btn secondary" onclick="saveImage(event)">이미지 저장</button></div><p class="small">결과는 취향 기반 추천이며, 실제 피팅 결과·예식장 조명·체형·예산에 따라 달라질 수 있어요.</p></div>`;
   window.scrollTo({top:0,behavior:'smooth'});
 }
 

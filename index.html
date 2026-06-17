@@ -259,13 +259,12 @@ const tagLabels={
 
 let current=0,answers=Array(questions.length).fill(null);
 let userNickname='';// CLAUDE
-const SHEET_URL='https://script.google.com/macros/s/AKfycbxNGh7yQuCKtR_KmGiwn1jq_a-qlDU-6O9M5EZFt7iMPL-5WIzmzg0JD1lQ4CYMk2VM/exec';// CLAUDE
+const SHEET_URL='https://script.google.com/macros/s/AKfycbxto7snHKlDNvhJfpImcOPNltI7rA7uTsaRJfP8qvj-JH7bsuQmyZ9nboXBpFIfvkmq/exec';// CLAUDE
 function submitNickname(){// CLAUDE: 닉네임 수집 후 구글 시트 저장, 테스트 시작
   const el=document.getElementById('nicknameInput');
   const val=el.value.trim();
   if(!val){el.classList.add('error');el.focus();setTimeout(()=>el.classList.remove('error'),300);return;}
-  userNickname=val;
-  fetch(SHEET_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify({nickname:val,date:new Date().toLocaleString('ko-KR')})}).catch(()=>{});
+  userNickname=val;// 닉네임 저장만, 전송은 퀴즈 완료 후
   startTest();
 }
 
@@ -326,6 +325,16 @@ function showResult(){
   const best=Object.entries(types)
     .map(([key,t])=>({key,...t,score:t.tags.reduce((sum,tag)=>sum+(scores[tag]||0),0)}))
     .sort((a,b)=>b.score-a.score)[0];
+  // CLAUDE: 닉네임 + 선택 답변 + 결과 유형 구글 시트 전송
+  const answerLabels=questions.map((q,qi)=>{
+    const ans=answers[qi];
+    if(ans===null||ans===undefined) return '';
+    if(Array.isArray(ans)) return ans.map(i=>q.c[i]?.label||'').join(', ');
+    return q.c[ans]?.label||'';
+  });
+  fetch(SHEET_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({nickname:userNickname,date:new Date().toLocaleString('ko-KR'),result:best.name,answers:answerLabels})
+  }).catch(()=>{});
   renderResult(best,scores);
 }
 

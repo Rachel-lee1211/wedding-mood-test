@@ -3,10 +3,12 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="robots" content="noindex,nofollow" /><!-- CLAUDE: 검색엔진 인덱싱/크롤링 차단 -->
   <title>웨딩 드레스 유형 테스트</title>
   <style>
     :root{--bg:#fff8fa;--card:#fff;--ink:#2d2328;--muted:#75666e;--accent:#d88da8;--accent2:#f3d4df;--line:#f0dce4;--dark:#8f5270}
-    *{box-sizing:border-box} body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Apple SD Gothic Neo,Noto Sans KR,sans-serif;background:linear-gradient(180deg,#fff8fa,#fff);color:var(--ink)}
+    *{box-sizing:border-box} body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Apple SD Gothic Neo,Noto Sans KR,sans-serif;background:linear-gradient(180deg,#fff8fa,#fff);color:var(--ink);user-select:none;-webkit-user-select:none}/* CLAUDE: 텍스트 선택 차단 */
+    input,textarea{user-select:text;-webkit-user-select:text}/* CLAUDE: 입력창은 선택 허용 */
     .wrap{max-width:920px;margin:0 auto;padding:34px 16px 70px}
     .hero{padding:34px 24px;border:1px solid var(--line);background:#fff;border-radius:28px;box-shadow:none;border-color:#f0d9e2}
     h1{font-size:32px;line-height:1.15;margin:0 0 12px}
@@ -417,6 +419,9 @@ function saveImage(e){
     btn.textContent='이미지 저장';btn.disabled=false;
   }).catch(()=>{btn.textContent='이미지 저장';btn.disabled=false;});
 }
+// CLAUDE: 우클릭·복사 이벤트 차단
+document.addEventListener('contextmenu',e=>e.preventDefault());
+document.addEventListener('copy',e=>{if(document.activeElement.tagName!=='INPUT')e.preventDefault();});
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script><!-- CLAUDE -->
 <div class="version">v0.02.4 · 👀 <span id="visitCount"></span></div><!-- CLAUDE -->
